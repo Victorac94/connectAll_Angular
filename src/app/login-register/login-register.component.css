@@ -1,0 +1,283 @@
+.main-container {
+    min-height: 100vh;
+    background: linear-gradient(to bottom right, #5AA7FF, #56AEF1, #0077DF);
+}
+
+.svg-image-background {
+    position: absolute;
+    width: calc(100% - 40em);
+    min-height: 100vh;
+    background-image: url('../../assets/images/undraw_hiking_d24r.svg');
+    background-size: 90% auto;
+    background-repeat: no-repeat;
+    background-position: 50px 50%;
+}
+
+section {
+    width: 38em;
+    margin-left: auto;
+    padding: 40px 110px;
+    color: white;
+    font-family: sans-serif;
+}
+
+h1 {
+    text-align: center;
+    font-size: 55px;
+    margin-bottom: 40px;
+}
+
+form {
+    width: 100%;
+    padding: 20px 0px;
+}
+
+form > div {
+    margin-bottom: 1em;
+}
+
+.register-login-buttons h4 {
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 0.5em;
+    font-size: 21px;
+    display: inline-block;
+}
+
+.register-login-buttons h4.active {
+    color: white;
+}
+
+.register-login-buttons h4:last-child {
+    margin-left: 30px;
+}
+
+.already-registered {
+    display: inline-block;
+    margin-left: 0.7em;
+}
+
+.already-registered span {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.form-group {
+    position: relative;
+}
+
+.register-form,
+.login-form {
+    opacity: 0.2;
+    animation: formAnimation 0.35s ease-out forwards;
+}
+
+@keyframes formAnimation {
+    from {
+        opacity: 0.2;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+label {
+    display: block;
+    font-size: 1.04em;
+    margin-bottom: 0.8em;
+    cursor: pointer;
+}
+
+input {
+    border: none;
+    border-bottom: 1.6px solid transparent;
+    border-radius: 0.4em;
+    font-size: 1.05em;
+    padding: 0.5em 1em;
+    width: 100%;
+    color: #616C7B;
+}
+
+input::placeholder {
+    color: #8398B5;
+}
+
+input[type=submit] {
+    cursor: pointer;
+    width: auto;
+    color: white;
+    background-color: rgb(96, 235, 94);
+    border: none;
+    border-radius: 0.4em;
+    padding: 0.5em 1em;
+}
+
+input[type=submit]:hover {
+    background-color: rgb(85, 228, 83);
+}
+
+.input-error {
+    border-color: red;
+}
+
+.input-correct {
+    border-color: rgb(0, 136, 0);
+}
+
+.error {
+    position: absolute;
+    top: calc(100% + 0.5em);
+    left: 50%;
+    transform: translateX(-50%);
+    color: red;
+    border-radius: 0.5em;
+    padding: 0.6em 1.2em;
+    background-color: white;
+    z-index: 100;
+    box-shadow: 1px 1px 3px #464d70;
+}
+
+.error::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    border-width: 0.4em;
+    border-style: solid;
+    border-color: transparent transparent white transparent;
+    transform: translate(-50%, -100%)
+}
+
+input[type=submit].invalid {
+    background-color: rgb(115, 250, 112);
+}
+
+.backdrop {
+    display: none;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(45, 49, 53, 0.6);
+    position: fixed;
+    top: 0;
+    left: 0;
+    color: white;
+}
+
+.show-backdrop {
+    display: block;
+}
+
+.close-modal {
+    background-image: url('../../assets/svg/times-solid.svg');
+    background-repeat: no-repeat;
+    position: fixed;
+    width: 3em;
+    height: 3em;
+    top: 1em;
+    right: 1em;
+    color: white;
+    cursor: pointer;
+}
+
+.modal-categories {
+    width: 70vw;
+    height: 80vh;
+    overflow: hidden;
+    background-color: white;
+    border-radius: 10px;
+    position: fixed;
+    top: 10vh;
+    left: 15vw;
+    transition: all 0.4s cubic-bezier(.32,.71,.35,1.11);
+    transform: scale(0.5);
+    transform-origin: center;
+    opacity: 0.4;
+}
+
+.show-modal-categories {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.modal-categories h3 {
+    font-size: 2rem;
+    margin: 1em;
+    margin-bottom: 0;
+    color: #555;
+}
+
+.modal-categories section {
+    width: 100%;
+    max-height: 100%;
+    overflow: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.modal-categories article {
+    width: 9em;
+    margin: 1em;
+    border-radius: 10px;
+    box-shadow: 1px 1px 3px rgb(191, 201, 214);
+    cursor: pointer;
+}
+
+.modal-categories article:hover {
+    background-color: rgb(244, 250, 255);
+}
+
+.modal-categories article > div {
+    width: 100%;
+    height: 9em;
+    padding: 1em;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.category-added-icon {
+    transform: scale(0);
+    transform-origin: center;
+    transition: transform 0.15s linear;
+    position: absolute;
+    top: -0.5em;
+    right: -0.5em;
+    width: 1.5em;
+    height: 1.5em;
+}
+
+.category-added-icon .show-category-added-icon {
+    transform: scale(1);
+}
+
+.modal-categories article .category-icon {
+    width: 60%;
+    height: auto;
+    display: block;
+}
+
+.modal-categories article p {
+    font-size: 1.3em;
+    margin: 0.7em;
+    text-align: center;
+    color: #666;
+}
+
+.modal-register-button {
+    position: absolute;
+    bottom: 1em;
+    right: 1.5em;;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.3em;
+    padding: 0.4em 0.6em;
+    color: white;
+    background-color: rgb(96, 235, 94);
+    cursor: pointer;
+}
+
+.modal-register-button:hover {
+    background-color: rgb(85, 228, 83);
+}

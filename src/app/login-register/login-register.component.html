@@ -1,0 +1,178 @@
+<div class="main-container">
+    <div class="svg-image-background"></div>
+    <section>
+        <h1>ConnectAll</h1>
+        <div class="register-login-buttons">
+            <h4 [routerLink]="['/register']" [routerLinkActive]="'active'">Register</h4>
+            <h4 [routerLink]="['/login']" [routerLinkActive]="'active'">Login</h4>
+        </div>
+        <!-- REGISTER FORM -->
+        <form *ngIf="ruta === '/register'" class="register-form" [formGroup]="register"
+            (ngSubmit)="onSubmitingRegister()" novalidate>
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text"
+                    [ngClass]="{'input-error': (register.controls.name.errors && register.controls.name.touched), 'input-correct': (!register.controls.name.errors && register.controls.name.dirty)}"
+                    id="name" placeholder="Name" formControlName="name" autofocus>
+                <div class="error" *ngIf="register.controls.name.errors?.required && register.controls.name.touched">
+                    <p>Name is required</p>
+                </div>
+                <div class="error"
+                    *ngIf="(register.controls.name.errors?.minlength || register.controls.name.errors?.maxlength) && register.controls.name.touched">
+                    <p>Name must be between 3 and 30 characters</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="last-name">Last name</label>
+                <input type="text"
+                    [ngClass]="{'input-error': (register.controls.lastName.errors && register.controls.lastName.touched), 'input-correct': (!register.controls.lastName.errors && register.controls.lastName.dirty)}"
+                    id="last-name" placeholder="Last name" formControlName="lastName">
+                <div class="error"
+                    *ngIf="register.controls.lastName.errors?.required && register.controls.lastName.touched">
+                    <p>Last name is required</p>
+                </div>
+                <div class="error"
+                    *ngIf="(register.controls.lastName.errors?.minlength || register.controls.lastName.errors?.maxlength) && register.controls.lastName.touched">
+                    <p>Last name must be between 3 and 80 caracters</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="text"
+                    [ngClass]="{'input-error': (register.controls.email.errors && register.controls.email.touched), 'input-correct': (!register.controls.email.errors && register.controls.email.dirty)}"
+                    id="email" placeholder="Email" formControlName="email">
+                <div class="error" *ngIf="register.controls.email.errors?.required && register.controls.email.touched">
+                    <p>An email is required</p>
+                </div>
+                <div class="error" *ngIf="register.controls.email.errors?.pattern && register.controls.email.touched">
+                    <p>Invalid email format</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password"
+                    [ngClass]="{'input-error': (register.controls.password.errors && register.controls.password.touched), 'input-correct': (!register.controls.password.errors && register.controls.password.dirty)}"
+                    id="password" placeholder="Password" formControlName="password">
+                <div class="error"
+                    *ngIf="register.controls.password.errors?.required && register.controls.password.touched">
+                    <p>Password is required</p>
+                </div>
+                <div class="error"
+                    *ngIf="register.controls.password.errors?.pattern && register.controls.password.touched">
+                    <p>Password may only contain alphanumeric characters and/or @ * #</p>
+                </div>
+                <div class="error"
+                    *ngIf="(register.controls.password.errors?.minlength || register.controls.password.errors?.maxlength) && register.controls.password.touched">
+                    <p>Password must be between 4 and 20 characters</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="repeat-password">Repeat password</label>
+                <input type="password"
+                    [ngClass]="{'input-error': ((register.controls.repeatPassword.errors || register.errors?.passwordnotmatch) && register.controls.repeatPassword.dirty), 'input-correct': (!register.controls.repeatPassword.errors && !register.errors?.passwordnotmatch && register.controls.repeatPassword.dirty)}"
+                    id="repeat-password" placeholder="Repeat password" formControlName="repeatPassword">
+                <div class="error"
+                    *ngIf="register.controls.repeatPassword.errors?.required && register.controls.repeatPassword.touched">
+                    <p>Repeat password is required</p>
+                </div>
+                <div class="error"
+                    *ngIf="register.controls.repeatPassword.errors?.pattern && register.controls.repeatPassword.touched">
+                    <p>Password may only contain alphanumeric characters and/or @ * #</p>
+                </div>
+                <div class="error"
+                    *ngIf="(register.controls.repeatPassword.errors?.minlength || register.controls.repeatPassword.errors?.maxlength) && register.controls.repeatPassword.touched">
+                    <p>Password must be between 4 and 20 characters</p>
+                </div>
+                <div class="error" *ngIf="register.errors?.passwordnotmatch && register.controls.repeatPassword.dirty">
+                    <p>Passwords do not match</p>
+                </div>
+            </div>
+            <input type="submit" [ngClass]="{invalid: register.invalid}" value="Registrar"
+                [disabled]="register.invalid">
+            <p class="already-registered">
+                Already registered? <span [routerLink]="['/login']">Login</span>
+            </p>
+        </form>
+        <!-- LOGIN FORM -->
+        <form *ngIf="ruta === '/login'" class="login-form" [formGroup]="login" (ngSubmit)="submitLogin(login)"
+            novalidate>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="text" id="email" placeholder="Email" formControlName="email" autofocus>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Password" formControlName="password">
+            </div>
+            <input type="submit" [ngClass]="{invalid: login.invalid}" value="Login" [disabled]="login.invalid">
+            <p class="already-registered">
+                Don't have an account? <span [routerLink]="['/register']">Register</span>
+            </p>
+        </form>
+    </section>
+    <div class="backdrop">
+        <i class="close-modal" (click)="closeModal()"></i>
+        <div class="modal-categories">
+            <h3>Choose at least one category</h3>
+            <section>
+                <article (click)="toggleCategorySelected($event, 'athletics')">
+                    <div>
+                        <img class="category-added-icon" src="../../assets/svg/check-circle-solid.svg"
+                            alt="category added icon">
+                        <img class="category-icon" src="../../assets/svg/Icon awesome-running.svg" alt="Athletics icon">
+                    </div>
+                    <p>Athletics</p>
+                </article>
+                <article (click)="toggleCategorySelected($event, 'badminton')">
+                    <div>
+                        <img class="category-added-icon" src="../../assets/svg/check-circle-solid.svg"
+                            alt="category added icon">
+                        <img class="category-icon" src="../../assets/svg/Icon map-tennis.svg">
+                    </div>
+                    <p>Badminton</p>
+                </article>
+                <article (click)="toggleCategorySelected($event, 'basketball')">
+                    <div>
+                        <img class="category-added-icon" src="../../assets/svg/check-circle-solid.svg"
+                            alt="category added icon">
+                        <img class="category-icon" src="../../assets/svg/Icon awesome-basketball-ball.svg">
+                    </div>
+                    <p>Basketball</p>
+                </article>
+                <article (click)="toggleCategorySelected($event, 'cycling')">
+                    <div>
+                        <img class="category-added-icon" src="../../assets/svg/check-circle-solid.svg"
+                            alt="category added icon">
+                        <img class="category-icon" src="../../assets/svg/Icon ionic-ios-bicycle.svg">
+                    </div>
+                    <p>Cycling</p>
+                </article>
+                <article (click)="toggleCategorySelected($event, 'darts')">
+                    <div>
+                        <img class="category-added-icon" src="../../assets/svg/check-circle-solid.svg"
+                            alt="category added icon">
+                        <img class="category-icon" src="../../assets/svg/Icon feather-target.svg">
+                    </div>
+                    <p>Darts</p>
+                </article>
+                <article (click)="toggleCategorySelected($event, 'hiking')">
+                    <div>
+                        <img class="category-added-icon" src="../../assets/svg/check-circle-solid.svg"
+                            alt="category added icon">
+                        <img class="category-icon" src="../../assets/svg/Icon awesome-hiking.svg">
+                    </div>
+                    <p>Hiking</p>
+                </article>
+                <article (click)="toggleCategorySelected($event, 'racing')">
+                    <div>
+                        <img class="category-added-icon" src="../../assets/svg/check-circle-solid.svg"
+                            alt="category added icon">
+                        <img class="category-icon" src="../../assets/svg/Icon ionic-ios-car.svg">
+                    </div>
+                    <p>Racing</p>
+                </article>
+            </section>
+            <button class="modal-register-button" (click)="submitRegister()">Register</button>
+        </div>
+    </div>
+</div>
