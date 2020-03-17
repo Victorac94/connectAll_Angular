@@ -5,6 +5,25 @@
 	font-family: sans-serif;
 }
 
+body{
+    background-color: #EEF9FE;    
+}
+
+.wrapper{
+    display: flex;
+}
+
+.leftbar{
+    width: 20%;
+    padding: 2em;
+}
+
+.feed{
+    padding: 1em;
+    width: 40%;
+    margin: 0 6.5em;
+}
+
 /* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
    License: none (public domain)

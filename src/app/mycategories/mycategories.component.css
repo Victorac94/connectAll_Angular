@@ -1,0 +1,34 @@
+.myCategories{
+    display: flex;
+    position: relative;
+    background-color: #7D67F7;
+    color: whitesmoke;
+    padding: .5em;
+    border-radius: 5px;
+}
+
+.myCategories i{
+    position: absolute;
+    right: 7%;
+    color:whitesmoke;
+}
+
+.categorias{
+    display: block;
+}
+
+.categorias a{
+    text-decoration: none;
+    color: black;
+}
+
+.categorias .categoria{
+    display: flex;
+    padding: .5em;
+    margin-top: .5em;
+    margin-left: .5em;   
+}
+
+.categorias .categoria img{
+    margin-right: .5em;
+}

@@ -1,0 +1,22 @@
+<header class="header">
+    <div class="busqueda">
+        <input type="text" id="searchBar" placeholder="Search category, users, posts...">
+    </div>
+    <div class="logo">
+        <a [routerLink]="['/home']"><img src="assets/images/logo azul.svg" alt=""></a>
+    </div>
+    <div class="miPerfil">
+        <a [routerLink]="['/user']">
+            <div class="profile">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/9/96/Steve_Carell_November_2014.jpg" alt=""
+                    class="fotoUsuario">
+                <h4>My Profile</h4>
+            </div>
+        </a>
+        <a [routerLink]="['/user']">
+            <div class="profile">
+                <h4>Log Out</h4>
+            </div>
+        </a>
+    </div>
+</header>
