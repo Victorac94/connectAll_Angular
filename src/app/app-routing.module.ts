@@ -4,9 +4,7 @@ import { LoginRegisterComponent } from './login-register/login-register.componen
 import { AddpostComponent } from './addpost/addpost.component';
 import { HeaderComponent } from './header/header.component';
 import { MycategoriesComponent } from './mycategories/mycategories.component';
-import { PostComponent } from './post/post.component';
 import { TrenddingComponent } from './trendding/trendding.component';
-import { UserComponent } from './user/user.component';
 import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
@@ -18,7 +16,6 @@ const routes: Routes = [
   { path: 'header', component: HeaderComponent },
   { path: 'mycategories', component: MycategoriesComponent },
   { path: 'trendding', component: TrenddingComponent },
-  { path: 'user', component: UserComponent },
   { path: '**', redirectTo: 'home' }
 ];
 

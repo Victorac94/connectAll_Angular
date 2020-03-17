@@ -9,7 +9,6 @@ import { TrenddingComponent } from './trendding/trendding.component';
 import { MycategoriesComponent } from './mycategories/mycategories.component';
 import { AddpostComponent } from './addpost/addpost.component';
 import { PostComponent } from './post/post.component';
-import { UserComponent } from './user/user.component';
 import { LoginRegisterComponent } from './login-register/login-register.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
@@ -22,7 +21,6 @@ import { HomeComponent } from './home/home.component';
     MycategoriesComponent,
     AddpostComponent,
     PostComponent,
-    UserComponent,
     LoginRegisterComponent,
     HomeComponent
   ],
