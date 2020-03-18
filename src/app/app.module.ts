@@ -5,10 +5,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
-import { TrenddingComponent } from './trendding/trendding.component';
+import { TrendingComponent } from './trending/trending.component';
 import { MycategoriesComponent } from './mycategories/mycategories.component';
-import { AddpostComponent } from './addpost/addpost.component';
-import { PostComponent } from './post/post.component';
+import { PostsComponent } from './posts/posts.component';
 import { LoginRegisterComponent } from './login-register/login-register.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
@@ -17,10 +16,9 @@ import { HomeComponent } from './home/home.component';
   declarations: [
     AppComponent,
     HeaderComponent,
-    TrenddingComponent,
+    TrendingComponent,
     MycategoriesComponent,
-    AddpostComponent,
-    PostComponent,
+    PostsComponent,
     LoginRegisterComponent,
     HomeComponent
   ],
