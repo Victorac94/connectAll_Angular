@@ -14,6 +14,7 @@ export class LoginRegisterComponent implements OnInit {
   login: FormGroup;
   ruta: string;
   categoriesAdded: string[];
+  dbCategories: any[];
 
   constructor(private router: Router, private loginRegisterService: LoginRegisterService) {
     this.ruta = '';
@@ -62,7 +63,7 @@ export class LoginRegisterComponent implements OnInit {
     this.ruta = this.router.routerState.snapshot.url;
   }
 
-  onSubmitingRegister() {
+  async onSubmitingRegister() {
     // Open modal to choose categories
     const backdrop = document.querySelector('.backdrop');
     const modal = document.querySelector('.modal-categories');
@@ -71,14 +72,22 @@ export class LoginRegisterComponent implements OnInit {
     setTimeout(() => {
       modal.classList.add('show-modal-categories');
     }, 10);
+
+    this.dbCategories = await this.loginRegisterService.getCategories();
   }
 
-  submitRegister() {
+  async submitRegister() {
     const form = {
       ...this.register.value,
       categories: [...this.categoriesAdded]
     }
-    this.loginRegisterService.sendRegisterForm(form);
+    const response = await this.loginRegisterService.sendRegisterForm(form);
+
+    if (response.success) {
+      this.router.navigate(['/home']);
+    } else {
+      console.log(response.error)
+    }
   }
 
   submitLogin(form) {
@@ -98,6 +107,7 @@ export class LoginRegisterComponent implements OnInit {
     // Get the category-added icon (green tick)
     const catAddedIcon = event.currentTarget.children[0].children[0];
     catAddedIcon.classList.toggle('show-category-added-icon');
+
     if (catAddedIcon.classList.contains('show-category-added-icon')) {
       catAddedIcon.style.transform = 'scale(1)';
     } else {
@@ -122,5 +132,9 @@ export class LoginRegisterComponent implements OnInit {
 
     backdrop.classList.remove('show-backdrop');
     modal.classList.remove('show-modal-categories');
+  }
+
+  capitalize(name) {
+    return name.replace(/^([a-z])/, (subM) => subM.toUpperCase());
   }
 }

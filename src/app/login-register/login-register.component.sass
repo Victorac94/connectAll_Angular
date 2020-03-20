@@ -204,7 +204,7 @@
                 justify-content: center
 
             article 
-                width: 7em
+                min-width: 7em
                 margin: 0.8em
                 border-radius: 5px
                 box-shadow: 1px 1px 3px rgb(191, 201, 214)
@@ -263,6 +263,15 @@
             &:hover 
                 background-color: rgb(85, 228, 83)
 
+@media (min-width: 768px) and (max-width: 1199px)
+    .main-container
+        section
+            width: 55%
+            padding-top: 80px
+            h1
+                font-size: 4em
+                margin-bottom: 80px
+    
 @media (min-width: 1200px)
     .main-container
 
@@ -282,89 +291,91 @@
             margin: 0
             margin-left: auto
         
-        .close-modal 
-            width: 3em
-            height: 3em
-            top: 1em
-            right: 1em
+        .show-modal-categories
 
-        .modal-categories 
-            width: 70vw
-            height: 80vh
-            border-radius: 10px
-            top: 10vh
-            left: 15vw
+            .close-modal 
+                width: 3em
+                height: 3em
+                top: 1em
+                right: 1em
 
-            h3 
-                font-size: 2rem
-                margin: 1em
-                margin-bottom: 0
-                color: #555
-
-            section 
-                width: 100%
-                max-height: 100%
-                overflow: auto
-                display: flex
-                flex-wrap: wrap
-                justify-content: center
-
-            article 
-                width: 9em
-                margin: 1em
+            .modal-categories 
+                width: 70vw
+                height: 80vh
                 border-radius: 10px
-                box-shadow: 1px 1px 3px rgb(191, 201, 214)
+                top: 10vh
+                left: 15vw
+
+                h3 
+                    font-size: 2rem
+                    margin: 1em
+                    margin-bottom: 0
+                    color: #555
+
+                section 
+                    width: 100%
+                    max-height: 100%
+                    overflow: auto
+                    display: flex
+                    flex-wrap: wrap
+                    justify-content: center
+
+                article 
+                    min-width: 9em
+                    margin: 1em
+                    border-radius: 10px
+                    box-shadow: 1px 1px 3px rgb(191, 201, 214)
+                    cursor: pointer
+
+                    &:hover 
+                        background-color: rgb(244, 250, 255)
+
+                    p 
+                        font-size: 1.3em
+                        margin: 0.7em
+                        text-align: center
+                        color: #666
+
+                article > div 
+                    width: 100%
+                    height: 9em
+                    padding: 1em
+                    position: relative
+                    display: flex
+                    justify-content: center
+                    align-items: center
+
+                    .category-icon
+                        width: 60%
+                        height: auto
+                        display: block
+
+
+            .category-added-icon 
+                transform: scale(0)
+                transform-origin: center
+                transition: transform 0.15s linear
+                position: absolute
+                top: -0.5em
+                right: -0.5em
+                width: 1.5em
+                height: 1.5em
+
+                .show-category-added-icon 
+                    transform: scale(1)
+
+
+            .modal-register-button 
+                position: absolute
+                bottom: 1em
+                right: 1.5em
+                border: none
+                border-radius: 5px
+                font-size: 1.3em
+                padding: 0.4em 0.6em
+                color: white
+                background-color: rgb(96, 235, 94)
                 cursor: pointer
 
                 &:hover 
-                    background-color: rgb(244, 250, 255)
-
-                p 
-                    font-size: 1.3em
-                    margin: 0.7em
-                    text-align: center
-                    color: #666
-
-            article > div 
-                width: 100%
-                height: 9em
-                padding: 1em
-                position: relative
-                display: flex
-                justify-content: center
-                align-items: center
-
-                .category-icon
-                    width: 60%
-                    height: auto
-                    display: block
-
-
-        .category-added-icon 
-            transform: scale(0)
-            transform-origin: center
-            transition: transform 0.15s linear
-            position: absolute
-            top: -0.5em
-            right: -0.5em
-            width: 1.5em
-            height: 1.5em
-
-            .show-category-added-icon 
-                transform: scale(1)
-
-
-        .modal-register-button 
-            position: absolute
-            bottom: 1em
-            right: 1.5em
-            border: none
-            border-radius: 5px
-            font-size: 1.3em
-            padding: 0.4em 0.6em
-            color: white
-            background-color: rgb(96, 235, 94)
-            cursor: pointer
-
-            &:hover 
-                background-color: rgb(85, 228, 83)
+                    background-color: rgb(85, 228, 83)
