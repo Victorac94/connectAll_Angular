@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+
 import { LoginRegisterService } from '../login-register.service';
+import { capitalize } from '../share/utility';
 
 @Component({
   selector: 'app-login-register',
@@ -16,7 +18,13 @@ export class LoginRegisterComponent implements OnInit {
   categoriesAdded: string[];
   dbCategories: any[];
 
-  constructor(private router: Router, private loginRegisterService: LoginRegisterService) {
+  capitalize: any; // Function that capitalizes words
+
+  constructor(
+    private router: Router,
+    private loginRegisterService: LoginRegisterService
+  ) {
+    this.capitalize = capitalize;
     this.ruta = '';
     this.categoriesAdded = [];
 
@@ -138,9 +146,5 @@ export class LoginRegisterComponent implements OnInit {
 
     backdrop.classList.remove('show-backdrop');
     modal.classList.remove('show-modal-categories');
-  }
-
-  capitalize(name) {
-    return name.replace(/^([a-z])/, (subM) => subM.toUpperCase());
   }
 }

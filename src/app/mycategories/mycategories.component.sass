@@ -1,33 +1,31 @@
-.myCategories
+.header
     display: flex
-    position: relative
-    background-color: #7D67F7
-    color: whitesmoke
-    padding: .5em
+    justify-content: space-between
+    align-items: center
+    padding: 0.5em
     border-radius: 5px
+    color: white
+    background-color: #7D67F7
 
+    .icon
+        width: 1em
+        fill: white
+        cursor: pointer
 
-.myCategories i
-    position: absolute
-    right: 7%
-    color: whitesmoke
+.categories
+    padding-top: 0.5em
+    article
+        display: flex
+        justify-content: flex-start
+        align-items: center
+        color: #444
+        padding: 0.4em 0.2em
+        margin: 0.4em 0
+        cursor: pointer
+        &:hover
+            color: #666
 
-
-.categorias
-    display: block
-
-
-.categorias a
-    text-decoration: none
-    color: black
-
-
-.categorias .categoria
-    display: flex
-    padding: .5em
-    margin-top: .5em
-    margin-left: .5em   
-
-
-.categorias .categoria img
-    margin-right: .5em
+        img
+            margin-right: 1em
+            width: 1.1em
+            height: auto

@@ -118,9 +118,9 @@
                     <div>
                         <img class="category-added-icon" src="../../assets/images/check-circle-solid.svg"
                             alt="category added icon">
-                        <img class="category-icon" [src]="category.icono" [alt]="category.nombre + ' icono'">
+                        <img class="category-icon" [src]="category.icon" [alt]="category.name + ' icono'">
                     </div>
-                    <p>{{capitalize(category.nombre)}}</p>
+                    <p>{{capitalize(category.name)}}</p>
                 </article>
             </section>
             <button class="modal-register-button" (click)="submitRegister()">Register</button>
