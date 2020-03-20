@@ -94,8 +94,7 @@
             </p>
         </form>
         <!-- LOGIN FORM -->
-        <form *ngIf="ruta === '/login'" class="login-form" [formGroup]="login" (ngSubmit)="submitLogin(login)"
-            novalidate>
+        <form *ngIf="ruta === '/login'" class="login-form" [formGroup]="login" (ngSubmit)="submitLogin()" novalidate>
             <div class="form-group">
                 <label for="email">Email</label>
                 <input type="text" id="email" placeholder="Email" formControlName="email" autofocus>

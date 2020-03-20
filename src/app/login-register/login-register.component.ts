@@ -90,8 +90,14 @@ export class LoginRegisterComponent implements OnInit {
     }
   }
 
-  submitLogin(form) {
-    this.loginRegisterService.sendLoginForm(form);
+  async submitLogin() {
+    const response = await this.loginRegisterService.sendLoginForm(this.login);
+    if (response.success) {
+      this.router.navigate(['/home']);
+      console.log(response.success);
+    } else {
+      console.log(response.error);
+    }
   }
 
   passwordValidator(registerForm) {

@@ -27,15 +27,14 @@ export class LoginRegisterService {
     }
   }
 
-  sendLoginForm = (form) => {
-    console.log(form.value);
-    this.httpClient.post<any>(this.baseUrl + '/users/login', form.value).toPromise()
-      .then(response => {
-        console.log(response);
-        localStorage.setItem('user-id', response.id);
-        localStorage.setItem('user-token', response.token);
-      }).catch(error => {
-        console.log(error);
-      })
+  sendLoginForm = async (form): Promise<any> => {
+    try {
+      const response = await this.httpClient.post<any>(this.baseUrl + '/users/login', form.value).toPromise()
+      localStorage.setItem('user-token', response.token);
+
+      return { success: response };
+    } catch (err) {
+      return { error: err };
+    }
   }
 }
