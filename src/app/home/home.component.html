@@ -2,9 +2,9 @@
 <div class="wrapper">
     <div class="leftbar">
         <app-trending></app-trending>
-        <app-mycategories (loadCatFeed)="loadCategoryFeed($event)"></app-mycategories>
+        <app-mycategories></app-mycategories>
     </div>
-    <div class="feed">
-        <app-posts [feed]="categoryFeed"></app-posts>
+    <div class="main">
+        <router-outlet></router-outlet>
     </div>
 </div>

@@ -1,20 +1,24 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginRegisterComponent } from './login-register/login-register.component';
-import { HeaderComponent } from './header/header.component';
-import { MycategoriesComponent } from './mycategories/mycategories.component';
-import { TrendingComponent } from './trending/trending.component';
 import { HomeComponent } from './home/home.component';
+import { PostsComponent } from './posts/posts.component';
+import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: 'home' },
   { path: 'register', component: LoginRegisterComponent },
   { path: 'login', component: LoginRegisterComponent },
-  { path: 'home', component: HomeComponent },
-  { path: 'header', component: HeaderComponent },
-  { path: 'mycategories', component: MycategoriesComponent },
-  { path: 'trending', component: TrendingComponent },
-  { path: '**', redirectTo: 'home' }
+  {
+    path: '', component: HomeComponent, children: [
+      /* localhost:3000/category/basketball */
+      { path: 'category/:categoryName/:categoryId', component: PostsComponent },
+      { path: 'category/all', component: PostsComponent },
+      /* localhost:3000/profile */
+      { path: 'profile', component: ProfileComponent },
+      { path: '**', redirectTo: 'category/all' }
+    ]
+  },
+  { path: '**', redirectTo: 'category' }
 ];
 
 @NgModule({

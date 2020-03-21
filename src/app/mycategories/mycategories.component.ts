@@ -21,8 +21,7 @@ export class MycategoriesComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private categoriesService: CategoriesService,
-    private postsService: PostsService
+    private categoriesService: CategoriesService
   ) {
     this.capitalize = capitalize;
     this.loadCatFeed = new EventEmitter();
