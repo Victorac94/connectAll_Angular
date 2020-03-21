@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 
 import { CategoriesService } from '../categories.service';
 import { capitalize } from '../share/utility';
+import { PostsService } from '../posts.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-mycategories',
@@ -10,13 +12,20 @@ import { capitalize } from '../share/utility';
 })
 export class MycategoriesComponent implements OnInit {
 
+  @Output() loadCatFeed: EventEmitter<any>;
+
   allCategories: any[];
   myCategories: any[];
 
   capitalize: any; // Function that capitalizes a string
 
-  constructor(private categoriesService: CategoriesService) {
+  constructor(
+    private router: Router,
+    private categoriesService: CategoriesService,
+    private postsService: PostsService
+  ) {
     this.capitalize = capitalize;
+    this.loadCatFeed = new EventEmitter();
   }
 
   async ngOnInit() {
@@ -28,6 +37,11 @@ export class MycategoriesComponent implements OnInit {
     const userCategories = await this.categoriesService.getUserCategories();
 
     this.myCategories = this.setCategoriesFormat(userCategories);
+  }
+
+  // Load feed by category selected
+  async loadCategoryFeed(id, name) {
+    this.loadCatFeed.emit({ catId: id, catName: name });
   }
 
   setCategoriesFormat(categories) {

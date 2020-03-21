@@ -13,7 +13,7 @@
     </header>
 
     <section class="categories">
-        <article *ngFor="let category of myCategories">
+        <article *ngFor="let category of myCategories" (click)="loadCategoryFeed(category.id, category.name)">
             <img [src]="category.icon" alt="category.name">
             <p>{{capitalize(category.name)}}</p>
         </article>
