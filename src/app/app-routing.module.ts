@@ -11,10 +11,11 @@ const routes: Routes = [
   {
     path: '', component: HomeComponent, children: [
       /* localhost:3000/category/basketball */
-      { path: 'category/:categoryName/:categoryId', component: PostsComponent },
       { path: 'category/all', component: PostsComponent },
+      { path: 'category/:categoryName/:categoryId', component: PostsComponent },
       /* localhost:3000/profile */
       { path: 'profile', component: ProfileComponent },
+      { path: 'user/:userId', component: ProfileComponent },
       { path: '**', redirectTo: 'category/all' }
     ]
   },

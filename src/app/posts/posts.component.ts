@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import * as moment from 'moment';
-import { PostsService } from '../posts.service';
 import { ActivatedRoute } from '@angular/router';
+import { PostsService } from '../posts.service';
+import { formatTime } from '../share/utility';
 
 @Component({
   selector: 'app-posts',
@@ -15,10 +15,13 @@ export class PostsComponent implements OnInit {
   categoryId: number;
   categoryName: string;
 
+  formatTime: any;
+
   constructor(
     private postsService: PostsService,
     private activatedRoute: ActivatedRoute
   ) {
+    this.formatTime = formatTime;
   }
 
   ngOnInit(): void {
@@ -44,7 +47,4 @@ export class PostsComponent implements OnInit {
     }
   }
 
-  formatTime(time) {
-    return moment(time).fromNow();
-  }
 }

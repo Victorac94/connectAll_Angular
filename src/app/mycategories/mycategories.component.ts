@@ -1,9 +1,8 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { CategoriesService } from '../categories.service';
-import { capitalize } from '../share/utility';
-import { PostsService } from '../posts.service';
-import { Router } from '@angular/router';
+import { capitalize, setCategoriesFormat } from '../share/utility';
 
 @Component({
   selector: 'app-mycategories',
@@ -34,8 +33,11 @@ export class MycategoriesComponent implements OnInit {
 
     // Get the categories the current user follows
     const userCategories = await this.categoriesService.getUserCategories();
+    sessionStorage.setItem('my-categories', JSON.stringify(userCategories));
 
-    this.myCategories = this.setCategoriesFormat(userCategories);
+    // Format categories from { fk_category: 1 } to { id: 1, name: 'athletics', icon: '../../category-icon.svg' }
+    this.myCategories = setCategoriesFormat(userCategories);
+    sessionStorage.setItem('my-categories', JSON.stringify(this.myCategories));
   }
 
   // Load feed by category selected
@@ -43,18 +45,4 @@ export class MycategoriesComponent implements OnInit {
     this.loadCatFeed.emit({ catId: id, catName: name });
   }
 
-  setCategoriesFormat(categories) {
-    // Format categories from { fk_category: 1 } to { id: 1, name: 'athletics', icon: '../../category-icon.svg' }
-    return categories.map(category => {
-      for (let cat of this.allCategories) {
-        if (category.fk_category === cat.id) {
-          return {
-            id: cat.id,
-            name: cat.name,
-            icon: cat.icon
-          }
-        }
-      }
-    })
-  }
 }
