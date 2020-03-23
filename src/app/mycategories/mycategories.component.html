@@ -13,9 +13,10 @@
     </header>
 
     <section class="categories">
-        <article *ngFor="let category of myCategories" [routerLink]="['/category', category.name, category.id]">
-            <img [src]="category.icon" alt="category.name">
-            <p>{{capitalize(category.name)}}</p>
+        <article *ngFor="let category of myCategories"
+            [routerLink]="['/category', category.category_name, category.id]">
+            <img [src]="category.category_icon" alt="category.category_name">
+            <p>{{capitalize(category.category_name)}}</p>
         </article>
     </section>
 </div>

@@ -19,8 +19,8 @@ export function setCategoriesFormat(userCategories) {
             if (category.fk_category === cat.id) {
                 return {
                     id: cat.id,
-                    name: cat.name,
-                    icon: cat.icon
+                    category_name: cat.category_name,
+                    category_icon: cat.category_icon
                 }
             }
         }

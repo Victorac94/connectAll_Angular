@@ -25,15 +25,15 @@
     <article *ngFor="let post of feed">
         <header>
             <div class="img-wrapper">
-                <img [src]="post.author_picture">
+                <img [src]="post.user_picture">
             </div>
             <div class="name-date">
-                <p>{{post.author_name}} {{post.author_last_name}}</p>
-                <span>{{formatTime(post.creation_date)}}</span>
+                <p>{{post.user_name}} {{post.user_last_name}}</p>
+                <span>{{formatTime(post.post_creation_date)}}</span>
             </div>
         </header>
         <main>
-            <p>{{post.body}}</p>
+            <p>{{post.post_body}}</p>
         </main>
     </article>
 </section>

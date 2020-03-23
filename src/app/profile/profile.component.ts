@@ -62,9 +62,9 @@ export class ProfileComponent implements OnInit {
         this.profileInfo = profileData;
 
         // Fill input fields with the user info
-        this.profileForm.controls.name.setValue(profileData.user.name);
-        this.profileForm.controls.lastName.setValue(profileData.user.last_name);
-        this.profileForm.controls.email.setValue(profileData.user.email);
+        this.profileForm.controls.name.setValue(profileData.user.user_name);
+        this.profileForm.controls.lastName.setValue(profileData.user.user_last_name);
+        this.profileForm.controls.email.setValue(profileData.user.user_email);
 
         // Show user categories
         this.userCategories = JSON.parse(sessionStorage.getItem('my-categories'))
