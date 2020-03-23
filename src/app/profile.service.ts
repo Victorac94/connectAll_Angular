@@ -13,23 +13,9 @@ export class ProfileService {
     this.baseUrl = 'http://localhost:3000/api/users';
   }
 
-  async getUser(userId): Promise<any> {
+  async getProfile(userId): Promise<any> {
     try {
-      return await this.httpClient.get<any>(`${this.baseUrl}/${userId}`).toPromise();
-    } catch (err) {
-      if (err.status === 401) {
-        // User is not logged in
-        this.router.navigate(['/login'])
-      } else {
-        console.log(err);
-        return err;
-      }
-    }
-  }
-
-  async getMyProfile(): Promise<any> {
-    try {
-      return await this.httpClient.get<any>(this.baseUrl + '/my-profile', this.createHeaders()).toPromise();
+      return await this.httpClient.get<any>(`${this.baseUrl}/${userId}`, this.createHeaders()).toPromise();
     } catch (err) {
       if (err.status === 401) {
         // User is not logged in

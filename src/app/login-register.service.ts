@@ -20,6 +20,7 @@ export class LoginRegisterService {
     try {
       const response = await this.httpClient.post<any>(this.baseUrl + '/users/register', form).toPromise()
       localStorage.setItem('user-token', response.token);
+      localStorage.setItem('user-id', response.userId);
 
       return { success: response };
     } catch (err) {
@@ -31,6 +32,7 @@ export class LoginRegisterService {
     try {
       const response = await this.httpClient.post<any>(this.baseUrl + '/users/login', form.value).toPromise()
       localStorage.setItem('user-token', response.token);
+      localStorage.setItem('user-id', response.userId);
 
       return { success: response };
     } catch (err) {

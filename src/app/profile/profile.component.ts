@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProfileService } from '../profile.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
@@ -21,6 +21,7 @@ export class ProfileComponent implements OnInit {
   capitalize: any;
 
   constructor(
+    private router: Router,
     private activatedRoute: ActivatedRoute,
     private profileService: ProfileService
   ) {
@@ -50,27 +51,26 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(async params => {
-      if (params.userId !== undefined) {
-        const response = await this.profileService.getUser(params.userId);
-        this.profileInfo = response;
+      // Get own's user id
+      const myUserId = localStorage.getItem('user-id');
 
-        console.log(response);
-      } else {
-        const profileData = await this.profileService.getMyProfile();
+      // If user is visiting it's own profile, redirect to /profile which will also load this function
+      if (params.userId === myUserId) {
+        this.router.navigate(['/profile']);
+        return;
+      };
 
-        // TODO: Desde el servidor no incluir la password en la respuesta. Por seguridad (?)
-        this.profileInfo = profileData;
+      // Get profile information
+      this.profileInfo = await this.profileService.getProfile(params.userId || myUserId);
+      console.log(this.profileInfo);
 
-        // Fill input fields with the user info
-        this.profileForm.controls.name.setValue(profileData.user.user_name);
-        this.profileForm.controls.lastName.setValue(profileData.user.user_last_name);
-        this.profileForm.controls.email.setValue(profileData.user.user_email);
+      // Fill input fields with the user info
+      this.profileForm.controls.name.setValue(this.profileInfo.user.user_name);
+      this.profileForm.controls.lastName.setValue(this.profileInfo.user.user_last_name);
+      this.profileForm.controls.email.setValue(this.profileInfo.user.user_email);
 
-        // Show user categories
-        this.userCategories = JSON.parse(sessionStorage.getItem('my-categories'))
-
-        console.log(profileData);
-      }
+      // Show user categories
+      this.userCategories = this.profileInfo.categories;
     })
   }
 

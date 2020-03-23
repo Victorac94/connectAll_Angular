@@ -25,10 +25,10 @@
     <article *ngFor="let post of feed">
         <header>
             <div class="img-wrapper">
-                <img [src]="post.user_picture">
+                <img [src]="post.user_picture" [routerLink]="['/user', post.fk_user]">
             </div>
             <div class="name-date">
-                <p>{{post.user_name}} {{post.user_last_name}}</p>
+                <p [routerLink]="['/user', post.fk_user]">{{post.user_name}} {{post.user_last_name}}</p>
                 <span>{{formatTime(post.post_creation_date)}}</span>
             </div>
         </header>

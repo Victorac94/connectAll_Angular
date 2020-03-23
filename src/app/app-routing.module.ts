@@ -19,7 +19,7 @@ const routes: Routes = [
       { path: '**', redirectTo: 'category/all' }
     ]
   },
-  { path: '**', redirectTo: 'category' }
+  { path: '**', redirectTo: 'category/all' }
 ];
 
 @NgModule({

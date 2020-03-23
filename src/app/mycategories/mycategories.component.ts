@@ -32,15 +32,12 @@ export class MycategoriesComponent implements OnInit {
     sessionStorage.setItem('all-categories', JSON.stringify(this.allCategories));
 
     // Get the categories the current user follows
-    const userCategories = await this.categoriesService.getUserCategories();
-    sessionStorage.setItem('my-categories', JSON.stringify(userCategories));
+    this.myCategories = await this.categoriesService.getUserCategories();
 
-    // Format categories from { fk_category: 1 } to { id: 1, name: 'athletics', icon: '../../category-icon.svg' }
-    this.myCategories = setCategoriesFormat(userCategories);
     sessionStorage.setItem('my-categories', JSON.stringify(this.myCategories));
   }
 
-  // Load feed by category selected
+  // Load feed depending on the selected category
   async loadCategoryFeed(id, name) {
     this.loadCatFeed.emit({ catId: id, catName: name });
   }
