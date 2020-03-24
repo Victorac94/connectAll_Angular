@@ -5,6 +5,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { formatTime, capitalize } from '../share/utility';
 import { CategoriesService } from '../categories.service';
+import { NgRedux } from '@angular-redux/store';
+import { IAppState } from '../redux/store/store';
 
 @Component({
   selector: 'app-profile',
@@ -26,7 +28,8 @@ export class ProfileComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private profileService: ProfileService,
-    private categoriesService: CategoriesService
+    private categoriesService: CategoriesService,
+    private ngRedux: NgRedux<IAppState>
   ) {
     this.editing = false;
     this.profileInfo = null;
@@ -55,10 +58,13 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
     this.activatedRoute.params.subscribe(async params => {
       // Get own's user id
-      const myUserId = localStorage.getItem('user-id');
+      // const myUserId = localStorage.getItem('user-id');
+      const state = await this.ngRedux.getState();
+
+      let myUserId = state.myId;
 
       // If user is visiting it's own profile, redirect to /profile which will also load this function
-      if (params.userId === myUserId) {
+      if (parseInt(params.userId) === myUserId) {
         this.router.navigate(['/profile']);
         return;
       };

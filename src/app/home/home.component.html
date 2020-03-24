@@ -1,10 +1,12 @@
-<app-header></app-header>
-<div class="wrapper">
-    <div class="leftbar">
-        <app-trending></app-trending>
-        <app-mycategories></app-mycategories>
-    </div>
-    <div class="main">
-        <router-outlet></router-outlet>
+<div *ngIf="gotMyId">
+    <app-header></app-header>
+    <div class="wrapper">
+        <div class="leftbar">
+            <app-trending></app-trending>
+            <app-mycategories></app-mycategories>
+        </div>
+        <div class="main">
+            <router-outlet></router-outlet>
+        </div>
     </div>
 </div>

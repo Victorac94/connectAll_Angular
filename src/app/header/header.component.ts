@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NgRedux } from '@angular-redux/store';
+import { IAppState } from '../redux/store/store';
 
 @Component({
   selector: 'app-header',
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  myCategories: any;
+
+  constructor(private ngRedux: NgRedux<IAppState>) { }
 
   ngOnInit(): void {
+    this.ngRedux.subscribe(() => {
+      const state = this.ngRedux.getState();
+
+      this.myCategories = state.myCategories;
+    })
   }
 
 }

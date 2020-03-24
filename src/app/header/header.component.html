@@ -43,6 +43,9 @@
     </div>
     <div class="categories">
         <select>
+            <option *ngFor="let category of myCategories">
+                {{category.category_name}}
+            </option>
         </select>
     </div>
 

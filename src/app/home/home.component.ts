@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { PostsService } from '../posts.service';
-import { Router } from '@angular/router';
+import { NgRedux } from '@angular-redux/store';
+
+import { IAppState } from '../redux/store/store';
+import { LoginRegisterService } from '../login-register.service';
+import * as actions from '../redux/actions/actions';
 
 @Component({
   selector: 'app-home',
@@ -9,12 +12,28 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(
-    private router: Router,
-    private postsService: PostsService
-  ) { }
+  gotMyId: boolean;
 
-  ngOnInit() {
+  constructor(
+    private loginRegisterService: LoginRegisterService,
+    private ngRedux: NgRedux<IAppState>
+  ) {
+    this.gotMyId = false;
+  }
+
+  async ngOnInit() {
+    try {
+      const myId = await this.loginRegisterService.getMyId();
+
+      this.gotMyId = true;
+
+      this.ngRedux.dispatch({
+        type: actions.CURRENT_USER_ID,
+        data: myId
+      })
+    } catch (err) {
+      this.gotMyId = false;
+    }
   }
 
 }
