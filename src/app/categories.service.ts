@@ -39,10 +39,24 @@ export class CategoriesService {
     }
   }
 
-  createHeaders() {
+  async deleteUserCategories(categories) {
+    try {
+      return await this.httpClient.delete<any>(this.baseUrl + '/user', this.createHeaders(categories)).toPromise();
+    } catch (err) {
+      if (err.status === 401) {
+        this.router.navigate(['/login']);
+      } else {
+        console.log(err);
+        return err;
+      }
+    }
+  }
+
+  createHeaders(categories = '') {
     return {
       headers: new HttpHeaders({
-        'user-token': localStorage.getItem('user-token')
+        'user-token': localStorage.getItem('user-token'),
+        'delete-categories': JSON.stringify(categories)
       })
     }
   }

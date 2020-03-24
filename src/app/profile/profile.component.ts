@@ -4,6 +4,7 @@ import { ProfileService } from '../profile.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { formatTime, capitalize } from '../share/utility';
+import { CategoriesService } from '../categories.service';
 
 @Component({
   selector: 'app-profile',
@@ -15,6 +16,7 @@ export class ProfileComponent implements OnInit {
   profileForm: FormGroup;
   editing: boolean;
   profileInfo: any;
+  myProfile: boolean;
   userCategories: any;
 
   formatTime: any;
@@ -23,7 +25,8 @@ export class ProfileComponent implements OnInit {
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private profileService: ProfileService
+    private profileService: ProfileService,
+    private categoriesService: CategoriesService
   ) {
     this.editing = false;
     this.profileInfo = null;
@@ -64,6 +67,9 @@ export class ProfileComponent implements OnInit {
       this.profileInfo = await this.profileService.getProfile(params.userId || myUserId);
       console.log(this.profileInfo);
 
+      // If user is visiting it's own profile grant access to edit the profile
+      this.myProfile = this.profileInfo.myProfile;
+
       // Fill input fields with the user info
       this.profileForm.controls.name.setValue(this.profileInfo.user.user_name);
       this.profileForm.controls.lastName.setValue(this.profileInfo.user.user_last_name);
@@ -94,6 +100,16 @@ export class ProfileComponent implements OnInit {
       setTimeout(() => {
         this.editing = false
       }, 0);
+    }
+  }
+
+  async unfollowCategory(catId) {
+    const response = await this.categoriesService.deleteUserCategories(catId);
+    console.log(response);
+
+    if (response.affectedRows !== 0) {
+      // this.userCategories = this.userCategories.map(cat => cat.id !== catId);
+      console.log('Categoria borrada con éxito!');
     }
   }
 }
