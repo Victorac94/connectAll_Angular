@@ -13,6 +13,21 @@ export class ProfileService {
     this.baseUrl = 'http://localhost:3000/api/users';
   }
 
+  async getMyBasicInfo(): Promise<any> {
+    try {
+      return await this.httpClient.get<any>(`${this.baseUrl}/basic`, this.createHeaders()).toPromise();
+    } catch (err) {
+      if (err.status === 401) {
+        // User is not logged in
+        this.router.navigate(['/login'])
+      } else {
+        console.log(err);
+        return err;
+      }
+    }
+  }
+
+
   async getProfile(userId): Promise<any> {
     try {
       return await this.httpClient.get<any>(`${this.baseUrl}/${userId}`, this.createHeaders()).toPromise();

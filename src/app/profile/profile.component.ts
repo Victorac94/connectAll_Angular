@@ -61,7 +61,7 @@ export class ProfileComponent implements OnInit {
       // const myUserId = localStorage.getItem('user-id');
       const state = await this.ngRedux.getState();
 
-      let myUserId = state.myId;
+      let myUserId = state.myBasicInfo.id;
 
       // If user is visiting it's own profile, redirect to /profile which will also load this function
       if (parseInt(params.userId) === myUserId) {

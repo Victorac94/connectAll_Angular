@@ -7,7 +7,7 @@ export function rootReducer(state: IAppState, action: any): IAppState {
             return { ...state, myCategories: action.data }
         case actions.LOAD_ALL_CATEGORIES:
             return { ...state, allCategories: action.data }
-        case actions.CURRENT_USER_ID:
-            return { ...state, myId: action.data }
+        case actions.MY_BASIC_INFO:
+            return { ...state, myBasicInfo: action.data }
     }
 }

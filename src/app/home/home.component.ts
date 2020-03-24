@@ -4,6 +4,7 @@ import { NgRedux } from '@angular-redux/store';
 import { IAppState } from '../redux/store/store';
 import { LoginRegisterService } from '../login-register.service';
 import * as actions from '../redux/actions/actions';
+import { ProfileService } from '../profile.service';
 
 @Component({
   selector: 'app-home',
@@ -12,27 +13,29 @@ import * as actions from '../redux/actions/actions';
 })
 export class HomeComponent implements OnInit {
 
-  gotMyId: boolean;
+  myInfo: any;
 
   constructor(
-    private loginRegisterService: LoginRegisterService,
+    // private loginRegisterService: LoginRegisterService,
+    private profileService: ProfileService,
     private ngRedux: NgRedux<IAppState>
   ) {
-    this.gotMyId = false;
+    this.myInfo = null;
   }
 
   async ngOnInit() {
     try {
-      const myId = await this.loginRegisterService.getMyId();
+      // const myId = await this.loginRegisterService.getMyId();
+      const profile = await this.profileService.getMyBasicInfo();
 
-      this.gotMyId = true;
+      this.myInfo = true;
 
       this.ngRedux.dispatch({
-        type: actions.CURRENT_USER_ID,
-        data: myId
+        type: actions.MY_BASIC_INFO,
+        data: profile
       })
     } catch (err) {
-      this.gotMyId = false;
+      this.myInfo = false;
     }
   }
 

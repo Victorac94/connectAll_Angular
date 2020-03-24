@@ -4,7 +4,7 @@ export interface IAppState {
     navegation: any,
     allCategories: any,
     myCategories: any,
-    myId: number
+    myBasicInfo: any,
 }
 
 export const INITIAL_STATE: IAppState = {
@@ -12,6 +12,6 @@ export const INITIAL_STATE: IAppState = {
     navegation: [],
     allCategories: [],
     myCategories: [],
-    myId: 0,
+    myBasicInfo: {},
 }
 

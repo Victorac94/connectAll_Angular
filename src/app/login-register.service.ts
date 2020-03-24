@@ -20,15 +20,15 @@ export class LoginRegisterService {
     return await this.httpClient.get<any[]>(this.baseUrl + '/categories').toPromise();
   }
 
-  getMyId = async () => {
-    const headers = {
-      headers: new HttpHeaders({
-        'user-token': localStorage.getItem('user-token')
-      })
-    }
+  // getMyId = async () => {
+  //   const headers = {
+  //     headers: new HttpHeaders({
+  //       'user-token': localStorage.getItem('user-token')
+  //     })
+  //   }
 
-    return await this.httpClient.get<any>(this.baseUrl + '/get-my-id', headers).toPromise();
-  }
+  //   return await this.httpClient.get<any>(this.baseUrl + '/get-my-id', headers).toPromise();
+  // }
 
   sendRegisterForm = async (form) => {
     try {
@@ -36,8 +36,8 @@ export class LoginRegisterService {
       localStorage.setItem('user-token', response.token);
       // localStorage.setItem('user-id', response.userId);
       this.ngRedux.dispatch({
-        type: actions.CURRENT_USER_ID,
-        data: response.userId
+        type: actions.MY_BASIC_INFO,
+        data: response.user
       });
 
       return { success: response };
@@ -52,8 +52,8 @@ export class LoginRegisterService {
       localStorage.setItem('user-token', response.token);
       // localStorage.setItem('user-id', response.userId);
       this.ngRedux.dispatch({
-        type: actions.CURRENT_USER_ID,
-        data: response.userId
+        type: actions.MY_BASIC_INFO,
+        data: response.user
       });
 
       return { success: response };
