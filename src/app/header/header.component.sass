@@ -1,76 +1,81 @@
-.header
-    height: 60px
-    background-color: #6AB3F8 
+#app-header-desktop
+    display: none
+
+#app-header-mobile-top,
+#app-header-mobile-bottom
+    width: 100%
     display: flex
-    padding: 1em
-    position: relative
-
-
-.header .logo
-    position: absolute
-    left: 40%
-    top: 7%
-    width: 200px
-    height: 50px
-
-
-.header .logo img
-    width: 200px
-    height: 50px
-
-
-.header .busqueda
-    position: absolute
-    left: 3%
-
-
-.header .miPerfil
-    position: absolute
-    right: 10%
-    display: flex
-    margin-left: .5em
-
-
-.header a
-    text-decoration: none
+    justify-content: space-between
+    align-items: center
+    padding: 0.4em 0.7em
+    background: linear-gradient(#4787ff, #4772ff)
     color: white
+    position: fixed
+    top: 0
+    left: 0
+    z-index: 100
 
+#app-header-mobile-top
+    
+    
+#app-header-mobile-bottom
+    top: initial
+    bottom: 0
 
-.header .miPerfil .profile
-    padding: .3em
-    display: flex
+    svg
+        fill: white
+        height: auto
+        cursor: pointer
+        padding: 0.3em
 
+    .feed
+        width: 2em
 
-.header .miPerfil .profile .fotoUsuario
-    position: absolute
-    top: -10px
-    left: -40px
-    height: 3em
-    width: 3em
+        svg
+            width: 100%
+            display: block
 
+    .search-wrapper
+        display: flex
+        align-items: center
+        
+        input 
+            display: none
+            width: 6em
+            padding: 0.6em 0.4em
+            color: #444444
+            border-radius: 5px
 
-.header .miPerfil .profile .logOut
-    position: absolute
-    top: 0px
-    left: 95px
-    height: 1.8em
-    width: 1.8em
+        .icon-wrapper
+            width: 2em
 
+            svg
+                width: 100%
+                display: block
 
-.busqueda input
-    width: 20em
-    border-radius: 5px
-    border: 1px solid rgb(186, 215, 251)
-    height: 30px
+    .chats
+        
+        svg
+            width: 2em
 
+    .profile-logout
 
-.profile .fotoUsuario
-    height: 4em
-    width: 4em
-    border-radius: 50%
-    padding: 0.5em
+        .profile
 
+            p
+                display: none
+            
+            svg
+                width: 2em
 
-.profile a
-    text-decoration: none
-    color: whitesmoke
+        .logout
+            display: none
+
+/** ##################### MEDIA QUERIES ################## **/
+@media (min-width: 768px)
+    #app-header-desktop
+        display: block
+
+    #app-header-mobile-bottom,
+    #app-header-mobile-top
+        display: none
