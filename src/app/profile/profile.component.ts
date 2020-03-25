@@ -5,7 +5,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { NgRedux } from '@angular-redux/store';
 
 import { formatTime, capitalize } from '../share/utility';
-import { CategoriesService } from '../categories.service';
+import { CategoryService } from '../category.service';
 import { IAppState } from '../redux/store/store';
 import * as actions from '../redux/actions/actions';
 
@@ -29,7 +29,7 @@ export class ProfileComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private profileService: ProfileService,
-    private categoriesService: CategoriesService,
+    private categoryService: CategoryService,
     private ngRedux: NgRedux<IAppState>,
   ) {
     this.editing = false;
@@ -111,7 +111,7 @@ export class ProfileComponent implements OnInit {
   }
 
   async unfollowCategory(catId) {
-    const response = await this.categoriesService.deleteUserCategories(catId);
+    const response = await this.categoryService.deleteUserCategories(catId);
     console.log(response);
 
     if (response.affectedRows !== 0) {

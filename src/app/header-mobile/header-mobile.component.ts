@@ -7,10 +7,10 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.sass']
+  templateUrl: './header-mobile.component.html',
+  styleUrls: ['./header-mobile.component.sass']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderMobileComponent implements OnInit {
 
   myCategories: any;
   myProfile: any;

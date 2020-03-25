@@ -1,0 +1,44 @@
+#home
+    width: 100%
+    min-height: 100vh
+    padding: 50px 0
+
+    .leftbar,
+    .main,
+    .chats
+        display: none
+
+    .show
+        display: initial
+
+/** ################ DESKTOP ################ **/
+@media (min-width: 1025px)
+    #home
+        max-width: 1200px
+        margin: 0 auto
+        padding: initial
+        display: grid
+        grid-template-columns: 1fr 2fr 1.5fr
+        grid-template-areas: 'leftbar main chats'
+        column-gap: 3em
+
+        .header
+            display: none
+
+        .leftbar,
+        .main,
+        .chats
+            display: initial
+    
+        .leftbar
+            grid-area: 'leftbar'
+            padding-top: 40px
+
+        .main
+            grid-area: 'main'
+
+        .chats
+            grid-area: 'chats'
+
+        .nav-mobile
+            display: none

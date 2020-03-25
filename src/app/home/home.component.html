@@ -1,12 +1,18 @@
-<div *ngIf="myInfo">
-    <app-header></app-header>
-    <div class="wrapper">
-        <div class="leftbar">
-            <app-trending></app-trending>
-            <app-mycategories></app-mycategories>
-        </div>
-        <div class="main">
-            <router-outlet></router-outlet>
-        </div>
+<div id="home" *ngIf="myInfo">
+    <!-- This header is for mobile only. It is going to show on the bottom of the screen -->
+    <div class="header">
+        <app-header></app-header>
+    </div>
+    <div class="leftbar">
+        <app-category></app-category>
+    </div>
+    <div class="main show">
+        <router-outlet></router-outlet>
+    </div>
+    <div class="chats">
+
+    </div>
+    <div class="nav-mobile">
+        <app-nav-mobile></app-nav-mobile>
     </div>
 </div>

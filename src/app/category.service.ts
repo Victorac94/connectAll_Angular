@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
-export class CategoriesService {
+export class CategoryService {
 
   baseUrl: string;
 

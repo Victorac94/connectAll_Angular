@@ -6,26 +6,31 @@ import { NgRedux, NgReduxModule, DevToolsExtension } from '@angular-redux/store'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
-import { TrendingComponent } from './trending/trending.component';
-import { MycategoriesComponent } from './mycategories/mycategories.component';
-import { PostsComponent } from './posts/posts.component';
-import { LoginRegisterComponent } from './login-register/login-register.component';
+import { CategoryComponent } from './category/category.component';
+import { CreatePostComponent } from './create-post/create-post.component';
+import { HeaderMobileComponent } from './header-mobile/header-mobile.component';
 import { HomeComponent } from './home/home.component';
+import { LoginRegisterComponent } from './login-register/login-register.component';
+import { NavMobileComponent } from './nav-mobile/nav-mobile.component';
+import { PostComponent } from './post/post.component';
 import { ProfileComponent } from './profile/profile.component';
+import { SearchComponent } from './search/search.component';
+
 import { IAppState, INITIAL_STATE } from './redux/store/store';
 import { rootReducer } from './redux/reducers/reducer';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
-    TrendingComponent,
-    MycategoriesComponent,
-    PostsComponent,
+    HeaderMobileComponent,
+    CategoryComponent,
+    PostComponent,
     LoginRegisterComponent,
     HomeComponent,
-    ProfileComponent
+    ProfileComponent,
+    CreatePostComponent,
+    SearchComponent,
+    NavMobileComponent
   ],
   imports: [
     BrowserModule,

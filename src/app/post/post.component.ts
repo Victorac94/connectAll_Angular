@@ -1,14 +1,14 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { PostsService } from '../posts.service';
+import { PostService } from '../post.service';
 import { formatTime } from '../share/utility';
 
 @Component({
-  selector: 'app-posts',
-  templateUrl: './posts.component.html',
-  styleUrls: ['./posts.component.sass']
+  selector: 'app-post',
+  templateUrl: './post.component.html',
+  styleUrls: ['./post.component.sass']
 })
-export class PostsComponent implements OnInit {
+export class PostComponent implements OnInit {
 
   @Input() feed: any;
 
@@ -18,7 +18,7 @@ export class PostsComponent implements OnInit {
   formatTime: any;
 
   constructor(
-    private postsService: PostsService,
+    private postService: PostService,
     private activatedRoute: ActivatedRoute
   ) {
     this.formatTime = formatTime;
@@ -35,7 +35,7 @@ export class PostsComponent implements OnInit {
 
   async loadCategoryFeed(categoryId) {
     try {
-      const response = await this.postsService.getPostsByCategory(categoryId);
+      const response = await this.postService.getPostsByCategory(categoryId);
       console.log(response);
       if (!response.error) {
         this.feed = response;

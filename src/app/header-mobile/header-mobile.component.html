@@ -1,0 +1,13 @@
+<!-- This header only shows on mobile devices -->
+<header id="header-mobile">
+    <div class="app-logo">
+        <h2>ConnectAll</h2>
+    </div>
+    <div class="categories" *ngIf="myCategories">
+        <select (change)="navigateTo($event.target.value)">
+            <option *ngFor="let category of myCategories" [value]="category.category_name + '/' + category.id">
+                {{capitalize(category.category_name)}}
+            </option>
+        </select>
+    </div>
+</header>

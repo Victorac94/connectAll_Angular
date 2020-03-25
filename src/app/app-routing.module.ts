@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginRegisterComponent } from './login-register/login-register.component';
 import { HomeComponent } from './home/home.component';
-import { PostsComponent } from './posts/posts.component';
+import { PostComponent } from './post/post.component';
 import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
@@ -11,8 +11,8 @@ const routes: Routes = [
   {
     path: '', component: HomeComponent, children: [
       /* localhost:3000/category/basketball */
-      { path: 'category/all', component: PostsComponent },
-      { path: 'category/:categoryName/:categoryId', component: PostsComponent },
+      { path: 'category/all', component: PostComponent },
+      { path: 'category/:categoryName/:categoryId', component: PostComponent },
       /* localhost:3000/profile */
       { path: 'profile', component: ProfileComponent },
       { path: 'user/:userId', component: ProfileComponent },
