@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ApplicationRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProfileService } from '../profile.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { NgRedux } from '@angular-redux/store';
 
 import { formatTime, capitalize } from '../share/utility';
 import { CategoriesService } from '../categories.service';
-import { NgRedux } from '@angular-redux/store';
 import { IAppState } from '../redux/store/store';
+import * as actions from '../redux/actions/actions';
 
 @Component({
   selector: 'app-profile',
@@ -29,7 +30,7 @@ export class ProfileComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private profileService: ProfileService,
     private categoriesService: CategoriesService,
-    private ngRedux: NgRedux<IAppState>
+    private ngRedux: NgRedux<IAppState>,
   ) {
     this.editing = false;
     this.profileInfo = null;
@@ -114,8 +115,12 @@ export class ProfileComponent implements OnInit {
     console.log(response);
 
     if (response.affectedRows !== 0) {
-      // this.userCategories = this.userCategories.map(cat => cat.id !== catId);
       console.log('Categoria borrada con éxito!');
+      this.userCategories = this.userCategories.filter(cat => cat.id != catId);
+      this.ngRedux.dispatch({
+        type: actions.DELETE_CATEGORY,
+        data: this.userCategories
+      });
     }
   }
 }
