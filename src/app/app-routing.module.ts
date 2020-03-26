@@ -10,8 +10,9 @@ const routes: Routes = [
   { path: 'login', component: LoginRegisterComponent },
   {
     path: '', component: HomeComponent, children: [
-      /* localhost:3000/category/basketball */
-      { path: 'category/all', component: PostComponent },
+      /* localhost:3000/category/all */
+      { path: 'category/:categoryName', component: PostComponent },
+      /* localhost:3000/category/basketball/3 */
       { path: 'category/:categoryName/:categoryId', component: PostComponent },
       /* localhost:3000/profile */
       { path: 'profile', component: ProfileComponent },

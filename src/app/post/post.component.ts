@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PostService } from '../post.service';
-import { formatTime } from '../share/utility';
+import { formatTime, capitalize } from '../share/utility';
 
 @Component({
   selector: 'app-post',
@@ -16,24 +16,42 @@ export class PostComponent implements OnInit {
   categoryName: string;
 
   formatTime: any;
+  capitalize: any;
 
   constructor(
     private postService: PostService,
     private activatedRoute: ActivatedRoute
   ) {
     this.formatTime = formatTime;
+    this.capitalize = capitalize;
   }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
-      this.categoryId = params.categoryId;
-      this.categoryName = params.categoryName;
+      console.log(params.categoryName)
+      if (params.categoryName !== 'all') {
+        this.categoryName = params.categoryName;
+        this.categoryId = params.categoryId;
 
-      this.loadCategoryFeed(params.categoryId);
+        this.loadPostsByCategory(params.categoryId);
+      } else {
+        this.categoryName = 'all';
+        this.loadAllPosts();
+      }
     });
   }
 
-  async loadCategoryFeed(categoryId) {
+  async loadAllPosts() {
+    try {
+      const response = await this.postService.getAllPosts();
+      console.log(response);
+      this.feed = response;
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  async loadPostsByCategory(categoryId) {
     try {
       const response = await this.postService.getPostsByCategory(categoryId);
       console.log(response);

@@ -30,8 +30,8 @@ export class CategoryComponent implements OnInit {
 
   async ngOnInit() {
     // Listen for changes in the redux store and update variables according to them
-    this.ngRedux.subscribe(() => {
-      const state = this.ngRedux.getState();
+    this.ngRedux.subscribe(async () => {
+      const state = await this.ngRedux.getState();
 
       this.allCategories = state.allCategories;
       this.myCategories = state.myCategories;

@@ -13,6 +13,10 @@
     </header>
 
     <section class="categories">
+        <article [routerLink]="['/category', 'all']">
+            <img src="../../assets/images/shapes-solid.svg" alt="All">
+            <p>All</p>
+        </article>
         <article *ngFor="let category of myCategories"
             [routerLink]="['/category', category.category_name, category.id]">
             <img [src]="category.category_icon" alt="category.category_name">

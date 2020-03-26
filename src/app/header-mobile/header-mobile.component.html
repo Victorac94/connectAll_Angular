@@ -5,6 +5,7 @@
     </div>
     <div class="categories" *ngIf="myCategories">
         <select (change)="navigateTo($event.target.value)">
+            <option value="all">All</option>
             <option *ngFor="let category of myCategories" [value]="category.category_name + '/' + category.id">
                 {{capitalize(category.category_name)}}
             </option>

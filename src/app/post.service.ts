@@ -9,7 +9,15 @@ export class PostService {
   baseUrl: string;
 
   constructor(private httpClient: HttpClient) {
-    this.baseUrl = 'http://127.0.0.1:3000/api/posts'
+    this.baseUrl = 'http://127.0.0.1:3000/api/posts';
+  }
+
+  async getAllPosts() {
+    try {
+      return await this.httpClient.get<any>(this.baseUrl).toPromise();
+    } catch (err) {
+      return { error: err };
+    }
   }
 
   async getPostsByCategory(categoryId) {

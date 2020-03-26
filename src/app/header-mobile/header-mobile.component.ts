@@ -31,7 +31,9 @@ export class HeaderMobileComponent implements OnInit {
   }
 
   navigateTo(value) {
-    const routes = value.split('/');
-    this.router.navigate(['/category', ...routes]);
+    if (value !== 'all') {
+      value = value.split('/');
+    }
+    this.router.navigate(['/category', ...value]);
   }
 }
