@@ -18,6 +18,7 @@ import { SearchComponent } from './search/search.component';
 
 import { IAppState, INITIAL_STATE } from './redux/store/store';
 import { rootReducer } from './redux/reducers/reducer';
+import { LeftBarDesktopComponent } from './left-bar-desktop/left-bar-desktop.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { rootReducer } from './redux/reducers/reducer';
     ProfileComponent,
     CreatePostComponent,
     SearchComponent,
-    NavMobileComponent
+    NavMobileComponent,
+    LeftBarDesktopComponent
   ],
   imports: [
     BrowserModule,

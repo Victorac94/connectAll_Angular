@@ -39,9 +39,9 @@ export class CategoryService {
     }
   }
 
-  async deleteUserCategories(categories) {
+  async deleteUserCategories(delCategories) {
     try {
-      return await this.httpClient.delete<any>(this.baseUrl + '/user', this.createHeaders(categories)).toPromise();
+      return await this.httpClient.delete<any>(this.baseUrl + '/user', this.createHeaders(null, delCategories)).toPromise();
     } catch (err) {
       if (err.status === 401) {
         this.router.navigate(['/login']);
@@ -52,10 +52,20 @@ export class CategoryService {
     }
   }
 
-  createHeaders(categories = '') {
+  async getCategoriesBySearch(value) {
+    try {
+      return await this.httpClient.get<any>(this.baseUrl + '/search', this.createHeaders(value)).toPromise();
+    } catch (err) {
+      console.log(err);
+      return err;
+    }
+  }
+
+  createHeaders(searchFor = '', categories = '') {
     return {
       headers: new HttpHeaders({
         'user-token': localStorage.getItem('user-token'),
+        'search-for': searchFor,
         'delete-categories': JSON.stringify(categories)
       })
     }

@@ -1,0 +1,194 @@
+.container
+    padding: 1em
+
+    .search-wrapper
+        display: flex
+        width: 100%
+        border: 1px solid #7dc4ff
+        border-radius: 5px
+        margin-bottom: 1em
+        overflow: hidden
+
+        input
+            flex-grow: 1
+            font-size: 1.1em
+            padding: 0.4em
+            border: none
+            outline: none
+            color: #626f85
+
+            &::placeholder
+                color: #8f9db4
+
+        button
+            height: 100%
+            font-size: 1.1em
+            color: #6ca9ff
+            padding: 0.4em
+            border: none
+            border-left: 1px solid #7dc4ff
+            background-color: white
+            outline: none
+
+            &:hover
+                background-color: #e4f3ff
+
+    .search-by
+        display: flex
+        justify-content: space-between
+        align-items: center
+        width: 100%
+        max-width: 100%
+        margin-bottom: 1em
+        overflow: auto
+
+        .search-item
+            display: flex
+            justify-content: space-around
+            align-items: center
+            flex-grow: 1
+            height: 2em
+            padding: 0 0.5em
+            margin: 0 0.5em
+            border: 1px solid #7dc4ff
+            border-radius: 5px 
+            color: #46566d
+            background-color: white
+            cursor: pointer
+            opacity: 0.8
+            transform: scale(0.93)
+            transition: opacity 0.1s ease-out, transform 0.1s ease-out
+
+            img
+                width: 1em
+
+        .active
+            border-color: #5edf44
+            opacity: 1
+            transform: scale(1)
+
+
+    .categories
+        
+        article
+            display: flex
+            justify-content: flex-start
+            align-items: center
+            color: #626f85
+            padding: 0.4em 0.2em
+            margin: 0.4em 0
+            cursor: pointer
+            &:hover
+                color: #666
+
+            img
+                margin-right: 1em
+                width: 1.1em
+                height: auto
+    
+    
+    .posts 
+        
+        article
+            border: 1px solid rgb(186, 215, 251)
+            border-radius: 5px
+            margin-top: 1em
+            color: #626f85
+            background-color: #fcfcfc
+            overflow: hidden
+            box-shadow: 1px 1px 3px #bbd7eb
+
+            &:first-child
+                margin-top: 7px
+
+            header
+                display: flex
+                flex-wrap: wrap
+                padding: 0.6em
+                background: linear-gradient(135deg, #6AB3F8, #6779EF)
+                color: white
+
+                .img-wrapper
+                    width: 2em
+                    height: 2em
+                    border-radius: 50%
+                    margin-right: 1em
+                    background-color: white
+                    overflow: hidden
+
+                    img
+                        width: 100%
+                        height: 100%
+                        cursor: pointer
+
+                .name-date
+                    display: flex
+                    flex-direction: column
+                    justify-content: space-between
+                    align-items: flex-start
+
+                    p
+                        font-size: 0.9em
+                        font-weight: bold
+                        cursor: pointer
+                        
+                    span
+                        font-size: 0.8em
+
+                & > p
+                    margin-left: auto
+                    color: #fafafa
+                    cursor: pointer
+
+            main
+                padding: 1em
+
+
+    .users
+        padding: 0 1em
+        display: grid
+        grid-template-columns: 1fr 1fr
+        column-gap: 2em
+        overflow: hidden
+
+        article
+            border-radius: 5px
+            margin: 0.75em 0
+            color: #626f85
+            background-color: white
+            box-shadow: 1px 1px 5px #bbd7eb
+
+            header
+                width: 100%
+                height: 35vw
+                position: relative
+                overflow: hidden
+            
+                img
+                    width: 100%
+                    height: auto
+                    position: absolute
+                    top: 50%
+                    left: 50%
+                    transform: translate(-50%, -50%)
+                
+            main
+                padding: 1em
+                display: flex
+                flex-direction: column
+                align-items: center
+                justify-content: space-between
+
+                h4
+                    font-size: 1.05em
+                    font-weight: bold
+                    margin-bottom: 1em
+                    text-align: center
+
+                button
+                    justify-self: flex-end
+                    border: 1px solid #ff651d
+                    border-radius: 5px
+                    padding: 0.5em
+                    color: #ff651d
+                    background-color: white

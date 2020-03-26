@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +25,22 @@ export class PostService {
       return await this.httpClient.get<any>(`${this.baseUrl}/category/${categoryId}`).toPromise();
     } catch (err) {
       return { error: err };
+    }
+  }
+
+  async getPostsBySearch(value) {
+    try {
+      return await this.httpClient.get<any>(this.baseUrl + '/search', this.createHeaders(value)).toPromise();
+    } catch (err) {
+      return { error: err };
+    }
+  }
+
+  createHeaders(value) {
+    return {
+      headers: new HttpHeaders({
+        'search-for': value
+      })
     }
   }
 }

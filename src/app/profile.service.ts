@@ -42,6 +42,14 @@ export class ProfileService {
     }
   }
 
+  async getProfilesBySearch(search): Promise<any> {
+    try {
+      return await this.httpClient.get<any>(this.baseUrl + '/search', this.createHeaders(search)).toPromise();
+    } catch (err) {
+      return err;
+    }
+  }
+
   async updateProfileInfo(profile): Promise<any> {
     try {
       return await this.httpClient.put<any>(this.baseUrl + '/my-profile', profile, this.createHeaders()).toPromise();
@@ -56,10 +64,11 @@ export class ProfileService {
     }
   }
 
-  createHeaders(): any {
+  createHeaders(searchFor = ''): any {
     return {
       headers: new HttpHeaders({
-        'user-token': localStorage.getItem('user-token')
+        'user-token': localStorage.getItem('user-token'),
+        'search-for': searchFor
       })
     }
   }
