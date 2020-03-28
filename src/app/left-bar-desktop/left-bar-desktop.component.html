@@ -6,7 +6,7 @@
     </svg>
     <h4>Search</h4>
 </article>
-<section class="container">
+<section class="container" *ngIf="profileInfo">
     <article class="profile" [routerLink]="['/profile']">
         <img [src]="profileInfo.user_picture" alt="My picture">
         <h4>My profile</h4>

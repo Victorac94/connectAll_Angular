@@ -1,6 +1,6 @@
 <!-- This shows on mobile devices on the bottom of the screen -->
 <nav id="nav-mobile">
-    <div class="feed" [routerLink]="['/']">
+    <div class="feed" [routerLink]="currentFeedUrl" (click)="setCurrentView('category')">
         <svg xmlns='http://www.w3.org/2000/svg' width='512' height='512' viewBox='0 0 512 512'>
             <path
                 d='M204,240H68a36,36,0,0,1-36-36V68A36,36,0,0,1,68,32H204a36,36,0,0,1,36,36V204A36,36,0,0,1,204,240Z' />
@@ -12,19 +12,19 @@
                 d='M444,480H308a36,36,0,0,1-36-36V308a36,36,0,0,1,36-36H444a36,36,0,0,1,36,36V444A36,36,0,0,1,444,480Z' />
         </svg>
     </div>
-    <div class="search" [routerLink]="['/search']">
+    <div class="search" [routerLink]="['/search']" (click)="setCurrentView('search')">
         <svg xmlns='http://www.w3.org/2000/svg' width='512' height='512' viewBox='0 0 512 512'>
             <path
                 d='M456.69,421.39,362.6,327.3a173.81,173.81,0,0,0,34.84-104.58C397.44,126.38,319.06,48,222.72,48S48,126.38,48,222.72s78.38,174.72,174.72,174.72A173.81,173.81,0,0,0,327.3,362.6l94.09,94.09a25,25,0,0,0,35.3-35.3ZM97.92,222.72a124.8,124.8,0,1,1,124.8,124.8A124.95,124.95,0,0,1,97.92,222.72Z' />
         </svg>
     </div>
-    <div class="add-post">
+    <div class="add-post" [routerLink]="['/add-post']" (click)="setCurrentView('addPost')">
         <svg xmlns='http://www.w3.org/2000/svg' width='512' height='512' viewBox='0 0 512 512'>
             <path
                 d='M256,48C141.31,48,48,141.31,48,256s93.31,208,208,208,208-93.31,208-208S370.69,48,256,48Zm80,224H272v64a16,16,0,0,1-32,0V272H176a16,16,0,0,1,0-32h64V176a16,16,0,0,1,32,0v64h64a16,16,0,0,1,0,32Z' />
         </svg>
     </div>
-    <div class="chats">
+    <div class="chats" [routerLink]="['/chats']" (click)="setCurrentView('chats')">
         <svg xmlns='http://www.w3.org/2000/svg' width='512' height='512' viewBox='0 0 512 512'>
             <path d='M60.44,389.17c0,.07,0,.2-.08.38C60.39,389.43,60.41,389.3,60.44,389.17Z' />
             <path
@@ -33,7 +33,7 @@
                 d='M299.87,425.39a15.74,15.74,0,0,0-10.29-8.1c-5.78-1.53-12.52-1.27-17.67-1.65a201.78,201.78,0,0,1-128.82-58.75A199.21,199.21,0,0,1,86.4,244.16C85,234.42,85,232,85,232a16,16,0,0,0-28-10.58h0S49.12,230,45.4,238.61a162.09,162.09,0,0,0,11,150.06C59,393,59,395,58.42,399.5c-2.73,14.11-7.51,39-10,51.91a24,24,0,0,0,8,22.92l.46.39A24.34,24.34,0,0,0,72,480a23.42,23.42,0,0,0,9-1.79l53.51-20.65a8.05,8.05,0,0,1,5.72,0c21.07,7.84,43,12,63.78,12a176,176,0,0,0,74.91-16.66c5.46-2.56,14-5.34,19-11.12A15,15,0,0,0,299.87,425.39Z' />
         </svg>
     </div>
-    <div class="profile" [routerLink]="['/profile']">
+    <div class="profile" [routerLink]="['/profile']" (click)="setCurrentView('profile')">
         <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="user"
             class="svg-inline--fa fa-user fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
             <path

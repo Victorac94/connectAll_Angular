@@ -5,6 +5,10 @@ export interface IAppState {
     allCategories: any,
     myCategories: any,
     myBasicInfo: any,
+    currentView: string,
+    currentCategory: string,
+    currentSearch: string,
+    currentFeedUrl: string,
 }
 
 export const INITIAL_STATE: IAppState = {
@@ -13,5 +17,9 @@ export const INITIAL_STATE: IAppState = {
     allCategories: [],
     myCategories: [],
     myBasicInfo: {},
+    currentView: '',
+    currentCategory: 'all',
+    currentSearch: '',
+    currentFeedUrl: ''
 }
 

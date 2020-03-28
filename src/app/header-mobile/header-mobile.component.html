@@ -3,12 +3,30 @@
     <div class="app-logo">
         <h2>ConnectAll</h2>
     </div>
-    <div class="categories" *ngIf="myCategories">
-        <select (change)="navigateTo($event.target.value)">
-            <option value="all">All</option>
-            <option *ngFor="let category of myCategories" [value]="category.category_name + '/' + category.id">
-                {{capitalize(category.category_name)}}
-            </option>
-        </select>
+    <div *ngIf="myCategories" [ngSwitch]="currentView">
+        <div class="categories" *ngSwitchCase="'category'">
+            <select (change)="navigateTo($event.target.value)">
+                <option value="all" [selected]="currentCategory === 'all'">All</option>
+                <option *ngFor="let category of myCategories" [selected]="currentCategory === category.category_name"
+                    [value]="category.category_name + '/' + category.id">
+                    {{capitalize(category.category_name)}}
+                </option>
+            </select>
+        </div>
+        <div *ngSwitchCase="'search'">
+            <p>Search</p>
+        </div>
+        <div *ngSwitchCase="'addPost'">
+            <p>Add post</p>
+        </div>
+        <div *ngSwitchCase="'chats'">
+            <p>Chats</p>
+        </div>
+        <div *ngSwitchCase="'profile'">
+            <p>Profile</p>
+        </div>
+        <div *ngSwitchtDefault>
+            <p>Hello</p>
+        </div>
     </div>
 </header>

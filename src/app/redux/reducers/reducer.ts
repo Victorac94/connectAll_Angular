@@ -11,5 +11,13 @@ export function rootReducer(state: IAppState, action: any): IAppState {
             return { ...state, myCategories: action.data };
         case actions.MY_BASIC_INFO:
             return { ...state, myBasicInfo: action.data };
+        case actions.SET_CURRENT_CATEGORY:
+            return { ...state, currentCategory: action.data };
+        case actions.SET_CURRENT_SEARCH:
+            return { ...state, currentSearch: action.data };
+        case actions.SET_CURRENT_VIEW:
+            return { ...state, currentView: action.data };
+        case actions.SET_CURRENT_FEED_URL:
+            return { ...state, currentFeedUrl: action.data };
     }
 }

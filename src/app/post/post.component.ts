@@ -28,7 +28,6 @@ export class PostComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
-      console.log(params.categoryName)
       if (params.categoryName !== 'all') {
         this.categoryName = params.categoryName;
         this.categoryId = params.categoryId;

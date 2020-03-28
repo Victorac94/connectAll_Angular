@@ -5,6 +5,7 @@ import { HomeComponent } from './home/home.component';
 import { PostComponent } from './post/post.component';
 import { ProfileComponent } from './profile/profile.component';
 import { SearchComponent } from './search/search.component';
+import { CreatePostComponent } from './create-post/create-post.component';
 
 const routes: Routes = [
   { path: 'register', component: LoginRegisterComponent },
@@ -17,6 +18,7 @@ const routes: Routes = [
       { path: 'category/:categoryName/:categoryId', component: PostComponent },
       /* localhost:3000/profile */
       { path: 'search', component: SearchComponent },
+      { path: 'add-post', component: CreatePostComponent },
       { path: 'profile', component: ProfileComponent },
       { path: 'user/:userId', component: ProfileComponent },
       { path: '**', redirectTo: 'category/all' }
