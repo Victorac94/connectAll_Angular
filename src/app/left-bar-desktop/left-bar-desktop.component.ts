@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgRedux } from '@angular-redux/store';
+
 import { IAppState } from '../redux/store/store';
+import * as actions from '../redux/actions/actions';
 
 @Component({
   selector: 'app-left-bar-desktop',
@@ -23,4 +25,10 @@ export class LeftBarDesktopComponent implements OnInit {
     })
   }
 
+  setCurrentView(value) {
+    this.ngRedux.dispatch({
+      type: actions.SET_CURRENT_VIEW,
+      data: value
+    })
+  }
 }

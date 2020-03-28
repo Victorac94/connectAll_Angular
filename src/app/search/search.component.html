@@ -37,7 +37,8 @@
                         <p [routerLink]="['/user', post.user_id]">{{post.user_name}} {{post.user_last_name}}</p>
                         <span>{{formatTime(post.post_creation_date)}}</span>
                     </div>
-                    <p [routerLink]="['/category', post.category_name, post.category_id]">
+                    <p [routerLink]="['/category', post.category_name, post.category_id]"
+                        (click)="setCurrentViewCategory('category', post.category_name)">
                         {{capitalize(post.category_name)}}</p>
                 </header>
                 <main>

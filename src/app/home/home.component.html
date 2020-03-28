@@ -8,6 +8,11 @@
         <app-category></app-category>
     </div>
     <div class="main show">
+        <div class="main-header" *ngIf="currentView" [ngSwitch]="currentView">
+            <h4 *ngSwitchCase="'category'">{{capitalize(currentCategory)}}</h4>
+            <h4 *ngSwitchCase="'search'">Search</h4>
+            <h4 *ngSwitchCase="'profile'">Profile</h4>
+        </div>
         <router-outlet></router-outlet>
     </div>
     <div class="chats">
