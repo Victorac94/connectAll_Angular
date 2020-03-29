@@ -106,6 +106,7 @@
                 </header>
                 <main>
                     <p>{{post.post_body}}</p>
+                    <img *ngIf="post.post_picture" [src]="post.post_picture">
                 </main>
             </article>
         </section>

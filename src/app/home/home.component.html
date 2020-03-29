@@ -8,7 +8,7 @@
         <app-category></app-category>
     </div>
     <div class="main show">
-        <div class="main-header" *ngIf="currentView" [ngSwitch]="currentView">
+        <div class="main-header" *ngIf="currentView && currentCategory" [ngSwitch]="currentView">
             <div *ngSwitchCase="'category'">
                 <h4>{{capitalize(currentCategory)}}</h4>
                 <a [routerLink]="['/add-post']" (click)="setCurrentView('add-post')">Create post</a>
