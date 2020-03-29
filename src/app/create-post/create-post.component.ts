@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { NgRedux } from '@angular-redux/store';
+import { Router } from '@angular/router';
+
 import { IAppState } from '../redux/store/store';
 import { capitalize } from '../share/utility';
 import { PostService } from '../post.service';
-import { Router } from '@angular/router';
+import * as actions from '../redux/actions/actions';
+import { AngularFireUploadTask } from '@angular/fire/storage';
 
 @Component({
   selector: 'app-create-post',
@@ -12,21 +15,28 @@ import { Router } from '@angular/router';
 })
 export class CreatePostComponent implements OnInit {
 
+  file: File;
+  task: AngularFireUploadTask;
+
   myInfo: any;
   myCategories: any;
   textAreaNotEmpty: boolean;
+  submittingPostWithMedia: boolean;
   postBody: any;
+  categoryIdSelected: number;
 
   capitalize: any;
 
   constructor(
     private postService: PostService,
     private router: Router,
-    private ngRedux: NgRedux<IAppState>) {
+    private ngRedux: NgRedux<IAppState>
+  ) {
     this.myInfo = {};
     this.myCategories = [];
     this.textAreaNotEmpty = false;
     this.capitalize = capitalize;
+    this.submittingPostWithMedia = false;
   }
 
   ngOnInit() {
@@ -39,43 +49,94 @@ export class CreatePostComponent implements OnInit {
   }
 
   async createPost(categoryId) {
-    try {
+    if (this.postBody !== undefined && this.checkTextArea(this.postBody)) {
+      this.categoryIdSelected = parseInt(categoryId);
 
-      if (this.checkTextArea(this.postBody)) {
-        // Create the Post
-        const post = {
-          body: this.postBody,
-          picture: null,
-          fk_category: categoryId
-        }
-        console.log(post);
-
-        const response = await this.postService.createPost(post);
-
-        if (response.affectedRows === 1) {
-          // Post has been created successfuly
-          // Redirect to the category the post just created belongs to
-          const goToCategory = this.myCategories.find(category => category.id === parseInt(categoryId));
-          this.router.navigate(['/category', goToCategory.category_name, goToCategory.id]);
-        } else {
-          console.log('There has been an error creating the post');
-        }
+      if (this.file) {
+        // Submitting post with media
+        this.submittingPostWithMedia = true;
       } else {
-        // Cannot create the post because it is empty
-        return
+        // Submitting post with no media
+        this.submitPost();
       }
-    } catch (err) {
-      console.log(err);
     }
   }
 
-  checkTextArea(tArea) {
+  async submitPost(mediaUrl = null) {
+    console.log('submitPost()');
+    if (this.checkTextArea(this.postBody) === true) {
+      // Create the Post
+      const post = {
+        body: this.postBody,
+        picture: mediaUrl,
+        fk_category: this.categoryIdSelected
+      }
+      console.log(post);
+
+      const response = await this.postService.createPost(post);
+
+      if (response.affectedRows === 1) {
+        // Post has been created successfuly
+        // Redirect to the category the post just created belongs to
+        const goToCategory = this.myCategories.find(category => category.id === this.categoryIdSelected);
+        this.router.navigate(['/category', goToCategory.category_name, goToCategory.id]);
+      } else {
+        console.log('There has been an error creating the post');
+      }
+    } else {
+      // Cannot create the post because it is empty
+      return
+    }
+  }
+
+  // Receive the upload task from upload-media.component.ts
+  receiveTask(task) {
+    this.task = task;
+  }
+
+  // Get the download url of the image/video just uploaded
+  gotDownloadMediaUrl(url) {
+    this.submitPost(url);
+  }
+
+  // Check if the file selected to add the post is an image or video
+  fileSelected(files: FileList) {
+    // If nothing was selected
+    if (files.item(0) === null) return;
+
+    if (files.item(0).type.includes('image/')) {
+      console.log('Es una imagen')
+    } else if (files.item(0).type.includes('video/')) {
+      console.log('Es un video');
+    } else {
+      return;
+    }
+
+    this.file = files.item(0);
+
+    console.log(files.item(0));
+  }
+
+  // Check that the body of the post is not empty. If it is empty, user cannot submit the post
+  checkTextArea(tArea): boolean {
     if (tArea.trim() !== '') {
       this.textAreaNotEmpty = true;
       return true;
     } else {
       this.textAreaNotEmpty = false;
+
+      this.ngRedux.dispatch({
+        type: actions.SET_GENERAL_ERROR,
+        data: 'You have to write the post\'s body before submitting.'
+      });
+
       return false;
     }
+  }
+
+  // Close the submitting-task (uploading image/video) modal and cancel the upload
+  closeModal() {
+    this.task.cancel();
+    this.submittingPostWithMedia = false;
   }
 }

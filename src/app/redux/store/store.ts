@@ -9,6 +9,7 @@ export interface IAppState {
     currentCategory: string,
     currentSearch: string,
     currentFeedUrl: string,
+    generalError: string
 }
 
 export const INITIAL_STATE: IAppState = {
@@ -20,6 +21,7 @@ export const INITIAL_STATE: IAppState = {
     currentView: '',
     currentCategory: 'all',
     currentSearch: '',
-    currentFeedUrl: ''
+    currentFeedUrl: '',
+    generalError: ''
 }
 

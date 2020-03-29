@@ -3,6 +3,9 @@ import { NgModule, isDevMode } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgRedux, NgReduxModule, DevToolsExtension } from '@angular-redux/store';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireStorageModule } from '@angular/fire/storage';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,10 +18,21 @@ import { NavMobileComponent } from './nav-mobile/nav-mobile.component';
 import { PostComponent } from './post/post.component';
 import { ProfileComponent } from './profile/profile.component';
 import { SearchComponent } from './search/search.component';
+import { LeftBarDesktopComponent } from './left-bar-desktop/left-bar-desktop.component';
+import { UploadMediaComponent } from './upload-media/upload-media.component';
 
 import { IAppState, INITIAL_STATE } from './redux/store/store';
 import { rootReducer } from './redux/reducers/reducer';
-import { LeftBarDesktopComponent } from './left-bar-desktop/left-bar-desktop.component';
+
+const firebaseConfig = {
+  apiKey: "AIzaSyA1n-AtdJil_EaSaPy0APXyrzUGfgC72d4",
+  authDomain: "connectall-6568a.firebaseapp.com",
+  databaseURL: "https://connectall-6568a.firebaseio.com",
+  projectId: "connectall-6568a",
+  storageBucket: "connectall-6568a.appspot.com",
+  messagingSenderId: "498019218914",
+  appId: "1:498019218914:web:8100fbf5c90d91bffd75bb"
+};
 
 @NgModule({
   declarations: [
@@ -32,7 +46,8 @@ import { LeftBarDesktopComponent } from './left-bar-desktop/left-bar-desktop.com
     CreatePostComponent,
     SearchComponent,
     NavMobileComponent,
-    LeftBarDesktopComponent
+    LeftBarDesktopComponent,
+    UploadMediaComponent
   ],
   imports: [
     BrowserModule,
@@ -40,9 +55,11 @@ import { LeftBarDesktopComponent } from './left-bar-desktop/left-bar-desktop.com
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    NgReduxModule
+    NgReduxModule,
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireStorageModule
   ],
-  providers: [],
+  providers: [AngularFirestore],
   bootstrap: [AppComponent]
 })
 export class AppModule {

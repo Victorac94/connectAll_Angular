@@ -1,0 +1,35 @@
+<div *ngIf="file" class="container">
+
+    <h3 *ngIf="!uploadCancelled else cancelled">Submitting post</h3>
+    <ng-template #cancelled>
+        <h3 class="cancelled">Submit cancelled!</h3>
+    </ng-template>
+
+    <p *ngIf="!uploadCancelled" class="uploading-media">
+        Uploading media...
+    </p>
+
+    <div *ngIf="percentage | async as pct" class="progress">
+        <progress [value]="pct" max="100"></progress>
+        {{ pct | number }}%
+    </div>
+
+    <div *ngIf="snapshot | async as snap">
+
+        <p *ngIf="isActive(snap)">
+            Uploading {{ (snap.bytesTransferred / 1000).toFixed(0) }}KB of {{ (snap.totalBytes / 1000).toFixed(0) }}KB
+        </p>
+
+        <div *ngIf="downloadURL as url">
+            <h6>Image uploaded!</h6>
+            <div class="img-wrapper">
+                <img [src]="url"><br>
+            </div>
+            <a [href]="url" target="_blank" rel="noopener">Download Me!</a>
+        </div>
+
+        <div *ngIf="isActive(snap)" class="action-buttons">
+            <button (click)="cancelUpload()" [disabled]="!isActive(snap)">Cancel</button>
+        </div>
+    </div>
+</div>

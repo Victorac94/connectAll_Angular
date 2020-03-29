@@ -6,6 +6,7 @@
         <div class="upload">
             <img src="../../assets/images/image-solid.svg" alt="upload photo">
             <p>Photo/video</p>
+            <input type="file" accept="image/*,video/*" (change)="fileSelected($event.target.files)">
         </div>
         <div class="categories">
             <select #selectCategories>
@@ -27,4 +28,11 @@
         <textarea [(ngModel)]="postBody" name="postBody" cols="30" rows="10"
             (input)="checkTextArea($event.target.value)" placeholder="Express your thoughts..." autofocus></textarea>
     </main>
+    <!-- Modal that shows up when submitting the post. Shows the media file upload progress -->
+    <div [ngClass]="{'backdrop': true, 'show': submittingPostWithMedia}" *ngIf="submittingPostWithMedia">
+        <app-upload-media [file]="file" (uploadTask)="receiveTask($event)"
+            (downloadMediaUrl)="gotDownloadMediaUrl($event)">
+        </app-upload-media>
+        <img class="close-modal" (click)="closeModal()" src="../../assets/images/times-solid.svg" alt="Close modal">
+    </div>
 </section>
