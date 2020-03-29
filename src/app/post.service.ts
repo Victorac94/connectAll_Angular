@@ -36,9 +36,18 @@ export class PostService {
     }
   }
 
-  createHeaders(value) {
+  async createPost(value) {
+    try {
+      return await this.httpClient.post<any>(this.baseUrl + '/new', value, this.createHeaders()).toPromise();
+    } catch (err) {
+      return { error: err }
+    }
+  }
+
+  createHeaders(value = '') {
     return {
       headers: new HttpHeaders({
+        'user-token': localStorage.getItem('user-token'),
         'search-for': value
       })
     }

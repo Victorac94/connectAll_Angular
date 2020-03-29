@@ -11,6 +11,9 @@
     .show
         display: initial
 
+    .main-header
+        display: none
+
 /** ################ DESKTOP ################ **/
 @media (min-width: 1025px)
     #home
@@ -38,6 +41,7 @@
             grid-area: 'main'
 
             .main-header
+                display: block
                 width: 100%
                 border-bottom: 1px solid #dbf1ff
                 padding: 0.8em 1em
@@ -45,6 +49,17 @@
                 background-color: white
                 font-weight: bold
                 box-shadow: 3px 3px 3px #bbd7eb
+
+                div
+                    display: flex
+                    justify-content: space-between
+                    align-items: center
+
+                    a
+                        font-size: 0.9em
+                        color: #1582e7
+                        text-decoration: none
+
 
         .chats
             grid-area: 'chats'

@@ -67,16 +67,22 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  setCurrentView() {
-    const url = this.router.url.split('/'); // ['', 'category', 'all']
+  setCurrentView(value = '') {
+    // If we call this function from the ngOnInit() then get the value from the current URL
+    if (value === '') {
+      value = this.router.url.split('/')[1]; // ['', 'category', 'all']
+    }
     let view = '';
 
-    switch (url[1]) {
+    switch (value) {
       case 'category':
         view = 'category';
         break;
       case 'search':
         view = 'search';
+        break;
+      case 'add-post':
+        view = 'addPost';
         break;
       case 'chats':
         view = 'chats';

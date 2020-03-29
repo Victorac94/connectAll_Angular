@@ -1,22 +1,30 @@
-<div class="escribirPost">
-    <div class="escribirPostHeader">
-        <p>Create post</p>
-        <img src="../../assets/images/times-solid.svg">
-    </div>
-    <div class="escribirPostMain">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/9/96/Steve_Carell_November_2014.jpg" alt=""
-            class="fotoUsuarioAddPost">
-        <input type="text" placeholder="Share your thoughts...">
-    </div>
-    <hr>
-    <div class="escribirPostFooter">
-        <div class="postFooterIconWrapper">
-            <img src="../../assets/images/image-solid.svg" alt="image" class="icon">
-            <span>Photo/Video</span>
+<section class="container" *ngIf="myInfo && myCategories">
+    <header>
+        <div class="profile-picture">
+            <img [src]="myInfo.user_picture">
         </div>
-        <div class="postFooterIconWrapper">
-            <img src="../../assets/images/link-solid.svg" alt="link" class="icon">
-            <span>Link</span>
+        <div class="upload">
+            <img src="../../assets/images/image-solid.svg" alt="upload photo">
+            <p>Photo/video</p>
         </div>
-    </div>
-</div>
+        <div class="categories">
+            <select #selectCategories>
+                <option *ngFor="let category of myCategories" [selected]="currentCategory === category.category_name"
+                    [value]="category.id">
+                    {{capitalize(category.category_name)}}
+                </option>
+            </select>
+        </div>
+        <div class="send" (click)="createPost(selectCategories.value)">
+            <svg [ngClass]="{'show': textAreaNotEmpty}" xmlns='http://www.w3.org/2000/svg' width='512' height='512'
+                viewBox='0 0 512 512'>
+                <path
+                    d='M476.59,227.05l-.16-.07L49.35,49.84A23.56,23.56,0,0,0,27.14,52,24.65,24.65,0,0,0,16,72.59V185.88a24,24,0,0,0,19.52,23.57l232.93,43.07a4,4,0,0,1,0,7.86L35.53,303.45A24,24,0,0,0,16,327V440.31A23.57,23.57,0,0,0,26.59,460a23.94,23.94,0,0,0,13.22,4,24.55,24.55,0,0,0,9.52-1.93L476.4,285.94l.19-.09a32,32,0,0,0,0-58.8Z' />
+            </svg>
+        </div>
+    </header>
+    <main>
+        <textarea [(ngModel)]="postBody" name="postBody" cols="30" rows="10"
+            (input)="checkTextArea($event.target.value)" placeholder="Express your thoughts..." autofocus></textarea>
+    </main>
+</section>

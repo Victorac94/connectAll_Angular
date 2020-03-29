@@ -9,9 +9,21 @@
     </div>
     <div class="main show">
         <div class="main-header" *ngIf="currentView" [ngSwitch]="currentView">
-            <h4 *ngSwitchCase="'category'">{{capitalize(currentCategory)}}</h4>
-            <h4 *ngSwitchCase="'search'">Search</h4>
-            <h4 *ngSwitchCase="'profile'">Profile</h4>
+            <div *ngSwitchCase="'category'">
+                <h4>{{capitalize(currentCategory)}}</h4>
+                <a [routerLink]="['/add-post']" (click)="setCurrentView('add-post')">Create post</a>
+            </div>
+            <div *ngSwitchCase="'search'">
+                <h4>Search</h4>
+                <a [routerLink]="['/add-post']" (click)="setCurrentView('add-post')">Create post</a>
+            </div>
+            <div *ngSwitchCase="'addPost'">
+                <h4>Create post</h4>
+            </div>
+            <div *ngSwitchCase="'profile'">
+                <h4>Profile</h4>
+                <a [routerLink]="['/add-post']" (click)="setCurrentView('add-post')">Create post</a>
+            </div>
         </div>
         <router-outlet></router-outlet>
     </div>
