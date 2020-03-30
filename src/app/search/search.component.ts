@@ -65,15 +65,17 @@ export class SearchComponent implements OnInit {
     this.currentlySearching = value;
   }
 
-  setCurrentViewCategory(view, category) {
+  setCurrentViewCategory(view, category = null) {
     this.ngRedux.dispatch({
       type: actions.SET_CURRENT_VIEW,
       data: view
     });
 
-    this.ngRedux.dispatch({
-      type: actions.SET_CURRENT_CATEGORY,
-      data: category
-    })
+    if (category) {
+      this.ngRedux.dispatch({
+        type: actions.SET_CURRENT_CATEGORY,
+        data: category
+      })
+    }
   }
 }

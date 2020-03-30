@@ -20,6 +20,10 @@
             <div *ngSwitchCase="'addPost'">
                 <h4>Create post</h4>
             </div>
+            <div *ngSwitchCase="'user'">
+                <h4>User</h4>
+                <a [routerLink]="['/add-post']" (click)="setCurrentView('add-post')">Create post</a>
+            </div>
             <div *ngSwitchCase="'profile'">
                 <h4>Profile</h4>
                 <a [routerLink]="['/add-post']" (click)="setCurrentView('add-post')">Create post</a>

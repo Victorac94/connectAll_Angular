@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, DoCheck } from '@angular/core';
 import { NgRedux } from '@angular-redux/store';
 import { Router } from '@angular/router';
 
@@ -13,11 +13,12 @@ import { AngularFireUploadTask } from '@angular/fire/storage';
   templateUrl: './create-post.component.html',
   styleUrls: ['./create-post.component.sass']
 })
-export class CreatePostComponent implements OnInit {
+export class CreatePostComponent implements OnInit, DoCheck {
 
   file: File;
   task: AngularFireUploadTask;
 
+  state: any;
   myInfo: any;
   myCategories: any;
   textAreaNotEmpty: boolean;
@@ -32,6 +33,7 @@ export class CreatePostComponent implements OnInit {
     private router: Router,
     private ngRedux: NgRedux<IAppState>
   ) {
+    console.log('Constructor');
     this.myInfo = {};
     this.myCategories = [];
     this.textAreaNotEmpty = false;
@@ -41,11 +43,23 @@ export class CreatePostComponent implements OnInit {
 
   ngOnInit() {
     this.ngRedux.subscribe(() => {
-      const state = this.ngRedux.getState();
+      this.state = this.ngRedux.getState();
 
-      this.myInfo = state.myBasicInfo;
-      this.myCategories = state.myCategories;
+      this.myInfo = this.state.myBasicInfo;
+      this.myCategories = this.state.myCategories;
     })
+  }
+
+  // ngDoCheck() needed because constructor executes (thus reinitializing this.myInfo, this.myCategories to empty JSON)
+  // after changing from another view (like search, etc) to this one again.
+  ngDoCheck() {
+    const state = this.ngRedux.getState();
+
+    if (this.myInfo !== state.myBasicInfo) {
+      this.myInfo = state.myBasicInfo;
+    } else if (this.myCategories !== state.myCategories) {
+      this.myCategories = state.myCategories;
+    }
   }
 
   async createPost(categoryId) {
@@ -80,6 +94,16 @@ export class CreatePostComponent implements OnInit {
         // Redirect to the category the post just created belongs to
         const goToCategory = this.myCategories.find(category => category.id === this.categoryIdSelected);
         this.router.navigate(['/category', goToCategory.category_name, goToCategory.id]);
+
+        this.ngRedux.dispatch({
+          type: actions.SET_CURRENT_VIEW,
+          data: 'category'
+        });
+
+        this.ngRedux.dispatch({
+          type: actions.SET_CURRENT_CATEGORY,
+          data: goToCategory.category_name
+        })
       } else {
         console.log('There has been an error creating the post');
       }

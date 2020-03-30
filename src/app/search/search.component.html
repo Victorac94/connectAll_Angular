@@ -21,7 +21,8 @@
         <!-- SEARCHING FOR CATEGORIES -->
         <section class="categories" *ngIf="searchResults && currentlySearching === 'categories'">
             <article *ngFor="let category of searchResults"
-                [routerLink]="['/category', category.category_name, category.id]">
+                [routerLink]="['/category', category.category_name, category.id]"
+                (click)="setCurrentViewCategory('category', category.category_name)">
                 <img [src]="category.category_icon" alt="category.category_name">
                 <p>{{capitalize(category.category_name)}}</p>
             </article>
@@ -31,10 +32,12 @@
             <article *ngFor="let post of searchResults">
                 <header>
                     <div class="img-wrapper">
-                        <img [src]="post.user_picture" [routerLink]="['/user', post.user_id]">
+                        <img [src]="post.user_picture" [routerLink]="['/user', post.user_id]"
+                            (click)="setCurrentViewCategory('user')">
                     </div>
                     <div class="name-date">
-                        <p [routerLink]="['/user', post.user_id]">{{post.user_name}} {{post.user_last_name}}</p>
+                        <p [routerLink]="['/user', post.user_id]" (click)="setCurrentViewCategory('user')">
+                            {{post.user_name}} {{post.user_last_name}}</p>
                         <span>{{formatTime(post.post_creation_date)}}</span>
                     </div>
                     <p [routerLink]="['/category', post.category_name, post.category_id]"
@@ -55,7 +58,8 @@
                 </header>
                 <main>
                     <h4>{{user.user_name}} {{user.user_last_name}}</h4>
-                    <button [routerLink]="['/user', user.id]">View profile</button>
+                    <button [routerLink]="['/user', user.id]" (click)="setCurrentViewCategory('user')">View
+                        profile</button>
                 </main>
             </article>
         </section>
