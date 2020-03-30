@@ -9,9 +9,9 @@
 <section class="container" *ngIf="profileInfo">
     <article class="profile" [routerLink]="['/profile']" (click)="setCurrentView('profile')">
         <img [src]="profileInfo.user_picture" alt="My picture">
-        <h4>My profile</h4>
+        <h4>{{profileInfo.user_name}} {{profileInfo.user_last_name}}</h4>
     </article>
-    <article class="logout" [routerLink]="['/login']">
+    <article class="logout" (click)="logout()">
         <img src="../../assets/images/door-open-solid.svg" alt="Logout">
         <h4>Logout</h4>
     </article>

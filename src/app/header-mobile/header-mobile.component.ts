@@ -53,4 +53,9 @@ export class HeaderMobileComponent implements OnInit {
       data: '/category/' + value.join('/')
     })
   }
+
+  logout() {
+    localStorage.removeItem('user-token');
+    this.router.navigate(['/login']);
+  }
 }

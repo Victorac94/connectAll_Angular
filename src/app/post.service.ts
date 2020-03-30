@@ -14,7 +14,7 @@ export class PostService {
 
   async getAllPosts() {
     try {
-      return await this.httpClient.get<any>(this.baseUrl).toPromise();
+      return await this.httpClient.get<any>(this.baseUrl, this.createHeaders()).toPromise();
     } catch (err) {
       return { error: err };
     }
@@ -22,7 +22,7 @@ export class PostService {
 
   async getPostsByCategory(categoryId) {
     try {
-      return await this.httpClient.get<any>(`${this.baseUrl}/category/${categoryId}`).toPromise();
+      return await this.httpClient.get<any>(`${this.baseUrl}/category/${categoryId}`, this.createHeaders()).toPromise();
     } catch (err) {
       return { error: err };
     }

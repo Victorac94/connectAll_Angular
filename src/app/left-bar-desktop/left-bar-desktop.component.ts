@@ -3,6 +3,7 @@ import { NgRedux } from '@angular-redux/store';
 
 import { IAppState } from '../redux/store/store';
 import * as actions from '../redux/actions/actions';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-left-bar-desktop',
@@ -13,7 +14,10 @@ export class LeftBarDesktopComponent implements OnInit {
 
   profileInfo: any;
 
-  constructor(private ngRedux: NgRedux<IAppState>) {
+  constructor(
+    private router: Router,
+    private ngRedux: NgRedux<IAppState>
+  ) {
     this.profileInfo = null;
   }
 
@@ -30,5 +34,10 @@ export class LeftBarDesktopComponent implements OnInit {
       type: actions.SET_CURRENT_VIEW,
       data: value
     })
+  }
+
+  logout() {
+    localStorage.removeItem('user-token');
+    this.router.navigate(['/login']);
   }
 }
