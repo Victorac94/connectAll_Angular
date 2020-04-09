@@ -63,7 +63,7 @@ export class CreatePostComponent implements OnInit, DoCheck {
   }
 
   async createPost(categoryId) {
-    if (this.postBody !== undefined && this.checkTextArea(this.postBody)) {
+    if (this.checkTextArea(this.postBody, true) === true) {
       this.categoryIdSelected = parseInt(categoryId);
 
       if (this.file) {
@@ -104,12 +104,26 @@ export class CreatePostComponent implements OnInit, DoCheck {
           type: actions.SET_CURRENT_CATEGORY,
           data: goToCategory.category_name
         })
+
+        this.ngRedux.dispatch({
+          type: actions.SET_NOTIFICATION_MESSAGE,
+          data: 'Post created successfully',
+          notificationType: 'success'
+        });
       } else {
-        console.log('There has been an error creating the post');
+        this.ngRedux.dispatch({
+          type: actions.SET_NOTIFICATION_MESSAGE,
+          data: 'There has been an error creating the post. Please try again',
+          notificationType: 'error'
+        });
       }
     } else {
       // Cannot create the post because it is empty
-      return
+      this.ngRedux.dispatch({
+        type: actions.SET_NOTIFICATION_MESSAGE,
+        data: 'You have to write the post\'s body before submitting.',
+        notificationType: 'error'
+      });
     }
   }
 
@@ -142,17 +156,20 @@ export class CreatePostComponent implements OnInit, DoCheck {
   }
 
   // Check that the body of the post is not empty. If it is empty, user cannot submit the post
-  checkTextArea(tArea): boolean {
-    if (tArea.trim() !== '') {
+  checkTextArea(tArea, sendingPost = false): boolean {
+    if (tArea && tArea.trim() !== '') {
       this.textAreaNotEmpty = true;
       return true;
     } else {
       this.textAreaNotEmpty = false;
 
-      this.ngRedux.dispatch({
-        type: actions.SET_GENERAL_ERROR,
-        data: 'You have to write the post\'s body before submitting.'
-      });
+      if (sendingPost) {
+        this.ngRedux.dispatch({
+          type: actions.SET_NOTIFICATION_MESSAGE,
+          data: 'You have to write the post\'s body before submitting.',
+          notificationType: 'error'
+        });
+      }
 
       return false;
     }

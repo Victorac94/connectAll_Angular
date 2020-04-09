@@ -19,7 +19,10 @@ export function rootReducer(state: IAppState, action: any): IAppState {
             return { ...state, currentView: action.data };
         case actions.SET_CURRENT_FEED_URL:
             return { ...state, currentFeedUrl: action.data };
-        case actions.SET_GENERAL_ERROR:
-            return { ...state, generalError: action.data };
+        case actions.SET_NOTIFICATION_MESSAGE:
+            console.log(action.notificationType)
+            return { ...state, notificationMessage: action.data, notificationType: action.notificationType, notificationCount: state.notificationCount + 1 };
+        default:
+            return state;
     }
 }

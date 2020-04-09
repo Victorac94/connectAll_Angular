@@ -26,3 +26,15 @@ export function setCategoriesFormat(userCategories) {
         }
     })
 }
+
+export function showNotification(type) {
+    const notificationContainer = document.querySelector('.notification-container');
+
+    notificationContainer.classList.add(type);
+    notificationContainer.addEventListener('animationend', () => removeNotificationAnimation(notificationContainer, type));
+}
+
+function removeNotificationAnimation(notificationContainer, className) {
+    notificationContainer.classList.remove(className);
+    notificationContainer.removeEventListener('animationend', removeNotificationAnimation);
+}

@@ -1,6 +1,10 @@
 import { Injectable, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { NgRedux } from '@angular-redux/store';
+
+import { IAppState } from './redux/store/store';
+import * as actions from './redux/actions/actions';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +14,7 @@ export class PostService {
   baseUrl: string;
 
   constructor(
+    private ngRedux: NgRedux<IAppState>,
     private router: Router,
     private httpClient: HttpClient
   ) {
@@ -24,10 +29,13 @@ export class PostService {
       if (err.status === 401) {
         // User is not logged in
         this.router.navigate(['/login']);
-        return;
-      } else {
+
+        this.dispatchNotification('Your session has expired. Please, login.', 'error');
+      }
+      else {
         console.log(err);
-        return err;
+
+        this.dispatchNotification(`Error ${err.status} while getting the posts`, 'error');
       }
     }
   }
@@ -40,10 +48,13 @@ export class PostService {
       if (err.status === 401) {
         // User is not logged in
         this.router.navigate(['/login']);
-        return;
-      } else {
+
+        this.dispatchNotification('Your session has expired. Please, login.', 'error');
+      }
+      else {
         console.log(err);
-        return err;
+
+        this.dispatchNotification(`Error ${err.status} while getting the posts`, 'error');
       }
     }
   }
@@ -56,10 +67,13 @@ export class PostService {
       if (err.status === 401) {
         // User is not logged in
         this.router.navigate(['/login']);
-        return;
-      } else {
+
+        this.dispatchNotification('Your session has expired. Please, login.', 'error');
+      }
+      else {
         console.log(err);
-        return err;
+
+        this.dispatchNotification(`Error ${err.status} while getting the posts`, 'error');
       }
     }
   }
@@ -72,10 +86,13 @@ export class PostService {
       if (err.status === 401) {
         // User is not logged in
         this.router.navigate(['/login']);
-        return;
-      } else {
+
+        this.dispatchNotification('Your session has expired. Please, login.', 'error');
+      }
+      else {
         console.log(err);
-        return err;
+
+        this.dispatchNotification(`Error ${err.status} while creating the post`, 'error');
       }
     }
   }
@@ -87,5 +104,13 @@ export class PostService {
         'search-for': value
       })
     }
+  }
+
+  dispatchNotification(message, type) {
+    this.ngRedux.dispatch({
+      type: actions.SET_NOTIFICATION_MESSAGE,
+      data: message,
+      notificationType: type
+    })
   }
 }

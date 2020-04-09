@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { NgRedux } from '@angular-redux/store';
+
+import { IAppState } from './redux/store/store';
+import * as actions from './redux/actions/actions';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +13,11 @@ export class ProfileService {
 
   baseUrl: string;
 
-  constructor(private httpClient: HttpClient, private router: Router) {
+  constructor(
+    private ngRedux: NgRedux<IAppState>,
+    private httpClient: HttpClient,
+    private router: Router
+  ) {
     this.baseUrl = 'http://localhost:3000/api/users';
   }
 
@@ -17,14 +25,17 @@ export class ProfileService {
     try {
       const headers = localStorage.getItem('user-token') ? this.createHeaders() : { headers: null };
       return await this.httpClient.get<any>(`${this.baseUrl}/basic`, headers).toPromise();
-    } catch (err) {
+    }
+    catch (err) {
       if (err.status === 401) {
         // User is not logged in
         this.router.navigate(['/login']);
-        return;
+
+        this.dispatchNotification('Your session has expired. Please, login.', 'error');
       } else {
         console.log(err);
-        return err;
+
+        this.dispatchNotification(`Error ${err.status} while getting profile data`, 'error');
       }
     }
   }
@@ -34,14 +45,17 @@ export class ProfileService {
     try {
       const headers = localStorage.getItem('user-token') ? this.createHeaders() : { headers: null };
       return await this.httpClient.get<any>(`${this.baseUrl}/${userId}`, headers).toPromise();
-    } catch (err) {
+    }
+    catch (err) {
       if (err.status === 401) {
         // User is not logged in
         this.router.navigate(['/login']);
-        return;
+
+        this.dispatchNotification('Your session has expired. Please, login.', 'error');
       } else {
         console.log(err);
-        return err;
+
+        this.dispatchNotification(`Error ${err.status} while getting profile data`, 'error');
       }
     }
   }
@@ -50,14 +64,17 @@ export class ProfileService {
     try {
       const headers = localStorage.getItem('user-token') ? this.createHeaders(search) : { headers: null };
       return await this.httpClient.get<any>(this.baseUrl + '/search', headers).toPromise();
-    } catch (err) {
+    }
+    catch (err) {
       if (err.status === 401) {
         // User is not logged in
         this.router.navigate(['/login']);
-        return;
+
+        this.dispatchNotification('Your session has expired. Please, login.', 'error');
       } else {
         console.log(err);
-        return err;
+
+        this.dispatchNotification(`Error ${err.status} while getting profile data`, 'error');
       }
     }
   }
@@ -66,14 +83,17 @@ export class ProfileService {
     try {
       const headers = localStorage.getItem('user-token') ? this.createHeaders() : { headers: null };
       return await this.httpClient.put<any>(this.baseUrl + '/my-profile', profile, headers).toPromise();
-    } catch (err) {
+    }
+    catch (err) {
       if (err.status === 401) {
         // User is not logged in
         this.router.navigate(['/login']);
-        return;
+
+        this.dispatchNotification('Your session has expired. Please, login.', 'error');
       } else {
         console.log(err);
-        return err;
+
+        this.dispatchNotification(`Error ${err.status} while getting profile data`, 'error');
       }
     }
   }
@@ -85,5 +105,13 @@ export class ProfileService {
         'search-for': searchFor
       })
     }
+  }
+
+  dispatchNotification(message, type) {
+    this.ngRedux.dispatch({
+      type: actions.SET_NOTIFICATION_MESSAGE,
+      data: message,
+      notificationType: type
+    })
   }
 }

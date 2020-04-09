@@ -79,6 +79,7 @@ export class LoginRegisterComponent implements OnInit {
     const modal = document.querySelector('.modal-categories');
 
     backdrop.classList.add('show-backdrop');
+
     setTimeout(() => {
       modal.classList.add('show-modal-categories');
     }, 10);
@@ -92,6 +93,7 @@ export class LoginRegisterComponent implements OnInit {
       ...this.register.value,
       categories: [...this.categoriesAdded]
     }
+
     this.loginRegisterService.sendRegisterForm(form);
   }
 
@@ -113,13 +115,16 @@ export class LoginRegisterComponent implements OnInit {
   toggleCategorySelected(event, category) {
     // Get the green tick icon
     const catAddedIcon = event.currentTarget.children[0].children[0];
+
     catAddedIcon.classList.toggle('show-category-added-icon');
 
     if (catAddedIcon.classList.contains('show-category-added-icon')) {
       catAddedIcon.style.transform = 'scale(1)';
-    } else {
+    }
+    else {
       catAddedIcon.style.transform = 'scale(0)';
     }
+
     this.addRemoveCategory(category)
   }
 
@@ -129,7 +134,8 @@ export class LoginRegisterComponent implements OnInit {
 
     if (catPresent === -1) {
       this.categoriesAdded.push(category);
-    } else {
+    }
+    else {
       this.categoriesAdded.splice(catPresent, 1);
     }
   }

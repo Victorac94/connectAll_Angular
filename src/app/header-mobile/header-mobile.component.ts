@@ -43,11 +43,14 @@ export class HeaderMobileComponent implements OnInit {
       value = value.split('/');
       catName = value[0];
     }
+
     this.router.navigate(['/category', ...value]);
+
     this.ngRedux.dispatch({
       type: actions.SET_CURRENT_CATEGORY,
       data: catName
     })
+
     this.ngRedux.dispatch({
       type: actions.SET_CURRENT_FEED_URL,
       data: '/category/' + value.join('/')
@@ -56,6 +59,7 @@ export class HeaderMobileComponent implements OnInit {
 
   logout() {
     localStorage.removeItem('user-token');
+
     this.router.navigate(['/login']);
   }
 }

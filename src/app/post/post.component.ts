@@ -38,7 +38,8 @@ export class PostComponent implements OnInit {
         this.categoryId = params.categoryId;
 
         this.loadPostsByCategory(params.categoryId);
-      } else {
+      }
+      else {
         this.categoryName = 'all';
         this.loadAllPosts();
       }
@@ -46,27 +47,11 @@ export class PostComponent implements OnInit {
   }
 
   async loadAllPosts() {
-    try {
-      const response = await this.postService.getAllPosts();
-      console.log(response);
-      this.feed = response;
-    } catch (err) {
-      console.log(err);
-    }
+    this.feed = await this.postService.getAllPosts();
   }
 
   async loadPostsByCategory(categoryId) {
-    try {
-      const response = await this.postService.getPostsByCategory(categoryId);
-      console.log(response);
-      if (!response.error) {
-        this.feed = response;
-      } else {
-        console.log(response);
-      }
-    } catch (err) {
-      console.log(err);
-    }
+    this.feed = await this.postService.getPostsByCategory(categoryId);
   }
 
   setCurrentViewCategory(view, category = null) {

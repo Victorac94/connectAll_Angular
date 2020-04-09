@@ -1,0 +1,36 @@
+.notification-container
+    position: absolute
+    top: 0
+    left: 50%
+    transform: translate(-50%, -120%)
+    padding: 1.3em 0.7em 1em 0.7em
+    border: 1px solid #777777
+    border-radius: 5px
+    background-color: white
+    z-index: 1000
+
+
+.error
+    border-color: #eb0f0f
+    color: #eb0f0f
+    animation: show-notification 7s forwards
+
+.success
+    border-color: #94e70e
+    color: #94e70e
+    animation: show-notification 7s forwards
+
+.info
+    border-color: #eb9413
+    color: #eb9413
+    animation: show-notification 7s forwards
+
+@keyframes show-notification 
+    0%
+        transform: translate(-50%, -120%)
+    8%
+        transform: translate(-50%, 10%)
+    92%
+        transform: translate(-50%, 10%)
+    100%
+        transform: translate(-50%, -120%)

@@ -72,7 +72,6 @@ export class ProfileComponent implements OnInit {
 
       // Get profile information
       this.profileInfo = await this.profileService.getProfile(params.userId || myUserId);
-      console.log(this.profileInfo);
 
       // If user is visiting it's own profile grant access to edit the profile
       this.myProfile = this.profileInfo.myProfile;

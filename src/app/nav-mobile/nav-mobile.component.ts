@@ -27,12 +27,14 @@ export class NavMobileComponent implements OnInit {
     })
 
     const url = this.router.url.split('/');
+
     if (url[1] === 'category') {
       this.ngRedux.dispatch({
         type: actions.SET_CURRENT_FEED_URL,
         data: this.router.url
       })
-    } else {
+    }
+    else {
       this.ngRedux.dispatch({
         type: actions.SET_CURRENT_FEED_URL,
         data: '/category/all'

@@ -1,6 +1,8 @@
 export interface IAppState {
     // La estructura de nuestra store 
     notificationMessage: string,
+    notificationType: string,
+    notificationCount: number,
     navegation: any,
     allCategories: any,
     myCategories: any,
@@ -9,11 +11,12 @@ export interface IAppState {
     currentCategory: string,
     currentSearch: string,
     currentFeedUrl: string,
-    generalError: string
 }
 
 export const INITIAL_STATE: IAppState = {
     notificationMessage: '',
+    notificationType: '',
+    notificationCount: 0,
     navegation: [],
     allCategories: [],
     myCategories: [],
@@ -22,6 +25,5 @@ export const INITIAL_STATE: IAppState = {
     currentCategory: 'all',
     currentSearch: '',
     currentFeedUrl: '',
-    generalError: ''
 }
 
