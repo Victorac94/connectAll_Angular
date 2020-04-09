@@ -39,7 +39,6 @@ export class SearchComponent implements OnInit {
   }
 
   async search(value) {
-    console.log(this.currentlySearching);
     switch (this.currentlySearching) {
       case 'categories':
         this.searchResults = await this.categoryService.getCategoriesBySearch(value);
@@ -51,7 +50,6 @@ export class SearchComponent implements OnInit {
         this.searchResults = await this.profileService.getProfilesBySearch(value);
         break;
     }
-    console.log(this.searchResults)
   }
 
   // Toggle the class active which says what to search for and puts a green border on the search-item element

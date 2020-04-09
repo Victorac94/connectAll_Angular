@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 
 import { LoginRegisterService } from '../login-register.service';
 import { capitalize } from '../share/utility';
+import { CategoryService } from '../category.service';
 
 @Component({
   selector: 'app-login-register',
@@ -22,7 +23,8 @@ export class LoginRegisterComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private loginRegisterService: LoginRegisterService
+    private loginRegisterService: LoginRegisterService,
+    private categoryService: CategoryService
   ) {
     this.capitalize = capitalize;
     this.ruta = '';
@@ -81,33 +83,24 @@ export class LoginRegisterComponent implements OnInit {
       modal.classList.add('show-modal-categories');
     }, 10);
 
-    this.dbCategories = await this.loginRegisterService.getCategories();
+    this.dbCategories = await this.categoryService.getAll();
   }
 
-  async submitRegister() {
+  // Submit register form
+  submitRegister() {
     const form = {
       ...this.register.value,
       categories: [...this.categoriesAdded]
     }
-    const response = await this.loginRegisterService.sendRegisterForm(form);
-
-    if (response.success) {
-      this.router.navigate(['/home']);
-    } else {
-      console.log(response.error)
-    }
+    this.loginRegisterService.sendRegisterForm(form);
   }
 
-  async submitLogin() {
-    const response = await this.loginRegisterService.sendLoginForm(this.login);
-    if (response.success) {
-      this.router.navigate(['/home']);
-      console.log(response.success);
-    } else {
-      console.log(response.error);
-    }
+  // Submit login form
+  submitLogin() {
+    this.loginRegisterService.sendLoginForm(this.login);
   }
 
+  // Check 'password' and 'repeat-password' fields have the same password
   passwordValidator(registerForm) {
     if (registerForm.controls.password.value === registerForm.controls.repeatPassword.value) {
       return null;
@@ -116,9 +109,9 @@ export class LoginRegisterComponent implements OnInit {
     }
   }
 
-  // Add/remove tick icon indicating a category has been selected
+  // Add/remove green tick icon indicating a category has been selected
   toggleCategorySelected(event, category) {
-    // Get the category-added icon (green tick)
+    // Get the green tick icon
     const catAddedIcon = event.currentTarget.children[0].children[0];
     catAddedIcon.classList.toggle('show-category-added-icon');
 
@@ -130,6 +123,7 @@ export class LoginRegisterComponent implements OnInit {
     this.addRemoveCategory(category)
   }
 
+  // Add or remove the green tick icon from a category from the 'Select a category' list
   addRemoveCategory(category) {
     const catPresent = this.categoriesAdded.findIndex(cat => cat === category);
 
@@ -140,6 +134,7 @@ export class LoginRegisterComponent implements OnInit {
     }
   }
 
+  // Close the 'Select a category' modal
   closeModal() {
     const backdrop = document.querySelector('.backdrop');
     const modal = document.querySelector('.modal-categories');

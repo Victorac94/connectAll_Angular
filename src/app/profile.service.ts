@@ -15,11 +15,13 @@ export class ProfileService {
 
   async getMyBasicInfo(): Promise<any> {
     try {
-      return await this.httpClient.get<any>(`${this.baseUrl}/basic`, this.createHeaders()).toPromise();
+      const headers = localStorage.getItem('user-token') ? this.createHeaders() : { headers: null };
+      return await this.httpClient.get<any>(`${this.baseUrl}/basic`, headers).toPromise();
     } catch (err) {
       if (err.status === 401) {
         // User is not logged in
-        this.router.navigate(['/login'])
+        this.router.navigate(['/login']);
+        return;
       } else {
         console.log(err);
         return err;
@@ -30,11 +32,13 @@ export class ProfileService {
 
   async getProfile(userId): Promise<any> {
     try {
-      return await this.httpClient.get<any>(`${this.baseUrl}/${userId}`, this.createHeaders()).toPromise();
+      const headers = localStorage.getItem('user-token') ? this.createHeaders() : { headers: null };
+      return await this.httpClient.get<any>(`${this.baseUrl}/${userId}`, headers).toPromise();
     } catch (err) {
       if (err.status === 401) {
         // User is not logged in
-        this.router.navigate(['/login'])
+        this.router.navigate(['/login']);
+        return;
       } else {
         console.log(err);
         return err;
@@ -44,19 +48,29 @@ export class ProfileService {
 
   async getProfilesBySearch(search): Promise<any> {
     try {
-      return await this.httpClient.get<any>(this.baseUrl + '/search', this.createHeaders(search)).toPromise();
+      const headers = localStorage.getItem('user-token') ? this.createHeaders(search) : { headers: null };
+      return await this.httpClient.get<any>(this.baseUrl + '/search', headers).toPromise();
     } catch (err) {
-      return err;
+      if (err.status === 401) {
+        // User is not logged in
+        this.router.navigate(['/login']);
+        return;
+      } else {
+        console.log(err);
+        return err;
+      }
     }
   }
 
   async updateProfileInfo(profile): Promise<any> {
     try {
-      return await this.httpClient.put<any>(this.baseUrl + '/my-profile', profile, this.createHeaders()).toPromise();
+      const headers = localStorage.getItem('user-token') ? this.createHeaders() : { headers: null };
+      return await this.httpClient.put<any>(this.baseUrl + '/my-profile', profile, headers).toPromise();
     } catch (err) {
       if (err.status === 401) {
         // User is not logged in
-        this.router.navigate(['/login'])
+        this.router.navigate(['/login']);
+        return;
       } else {
         console.log(err);
         return err;

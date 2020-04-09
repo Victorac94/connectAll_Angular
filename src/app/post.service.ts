@@ -1,5 +1,6 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -8,39 +9,74 @@ export class PostService {
 
   baseUrl: string;
 
-  constructor(private httpClient: HttpClient) {
+  constructor(
+    private router: Router,
+    private httpClient: HttpClient
+  ) {
     this.baseUrl = 'http://127.0.0.1:3000/api/posts';
   }
 
   async getAllPosts() {
     try {
-      return await this.httpClient.get<any>(this.baseUrl, this.createHeaders()).toPromise();
+      const headers = localStorage.getItem('user-token') ? this.createHeaders() : { headers: null };
+      return await this.httpClient.get<any>(this.baseUrl, headers).toPromise();
     } catch (err) {
-      return { error: err };
+      if (err.status === 401) {
+        // User is not logged in
+        this.router.navigate(['/login']);
+        return;
+      } else {
+        console.log(err);
+        return err;
+      }
     }
   }
 
   async getPostsByCategory(categoryId) {
     try {
-      return await this.httpClient.get<any>(`${this.baseUrl}/category/${categoryId}`, this.createHeaders()).toPromise();
+      const headers = localStorage.getItem('user-token') ? this.createHeaders() : { headers: null };
+      return await this.httpClient.get<any>(`${this.baseUrl}/category/${categoryId}`, headers).toPromise();
     } catch (err) {
-      return { error: err };
+      if (err.status === 401) {
+        // User is not logged in
+        this.router.navigate(['/login']);
+        return;
+      } else {
+        console.log(err);
+        return err;
+      }
     }
   }
 
   async getPostsBySearch(value) {
     try {
-      return await this.httpClient.get<any>(this.baseUrl + '/search', this.createHeaders(value)).toPromise();
+      const headers = localStorage.getItem('user-token') ? this.createHeaders(value) : { headers: null };
+      return await this.httpClient.get<any>(this.baseUrl + '/search', headers).toPromise();
     } catch (err) {
-      return { error: err };
+      if (err.status === 401) {
+        // User is not logged in
+        this.router.navigate(['/login']);
+        return;
+      } else {
+        console.log(err);
+        return err;
+      }
     }
   }
 
   async createPost(value) {
     try {
-      return await this.httpClient.post<any>(this.baseUrl + '/new', value, this.createHeaders()).toPromise();
+      const headers = localStorage.getItem('user-token') ? this.createHeaders() : { headers: null };
+      return await this.httpClient.post<any>(this.baseUrl + '/new', value, headers).toPromise();
     } catch (err) {
-      return { error: err }
+      if (err.status === 401) {
+        // User is not logged in
+        this.router.navigate(['/login']);
+        return;
+      } else {
+        console.log(err);
+        return err;
+      }
     }
   }
 

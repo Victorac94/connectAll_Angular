@@ -17,47 +17,50 @@ export class CategoryService {
     try {
       return await this.httpClient.get<any>(this.baseUrl).toPromise();
     } catch (err) {
-      if (err.status === 401) {
-        this.router.navigate(['/login'])
-      } else {
-        console.log(err);
-        return err;
-      }
+      console.log(err);
+      // Show global messasge with the error
     }
   }
 
   async getUserCategories() {
     try {
-      return await this.httpClient.get<any>(this.baseUrl + '/follow', this.createHeaders()).toPromise();
+      const headers = localStorage.getItem('user-token') ? this.createHeaders() : { headers: null };
+      return await this.httpClient.get<any>(this.baseUrl + '/follow', headers).toPromise();
     } catch (err) {
       if (err.status === 401) {
         this.router.navigate(['/login'])
       } else {
         console.log(err);
-        return err;
+        // Show global messasge with the error
       }
     }
   }
 
   async deleteUserCategories(delCategories) {
     try {
-      return await this.httpClient.delete<any>(this.baseUrl + '/user', this.createHeaders(null, delCategories)).toPromise();
+      const headers = localStorage.getItem('user-token') ? this.createHeaders(null, delCategories) : { headers: null };
+      return await this.httpClient.delete<any>(this.baseUrl + '/user', headers).toPromise();
     } catch (err) {
       if (err.status === 401) {
         this.router.navigate(['/login']);
       } else {
         console.log(err);
-        return err;
+        // Show global messasge with the error
       }
     }
   }
 
   async getCategoriesBySearch(value) {
     try {
-      return await this.httpClient.get<any>(this.baseUrl + '/search', this.createHeaders(value)).toPromise();
+      const headers = localStorage.getItem('user-token') ? this.createHeaders(value) : { headers: null };
+      return await this.httpClient.get<any>(this.baseUrl + '/search', headers).toPromise();
     } catch (err) {
-      console.log(err);
-      return err;
+      if (err.status === 401) {
+        this.router.navigate(['/login']);
+      } else {
+        console.log(err);
+        // Show global messasge with the error
+      }
     }
   }
 

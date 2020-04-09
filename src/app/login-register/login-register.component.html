@@ -124,7 +124,8 @@
                     <p>{{capitalize(category.category_name)}}</p>
                 </article>
             </section>
-            <button class="modal-register-button" (click)="submitRegister()">Register</button>
+            <button class="modal-register-button" (click)="submitRegister()"
+                [disabled]="!categoriesAdded.length">Register</button>
         </div>
     </div>
 </div>
