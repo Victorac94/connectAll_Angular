@@ -37,7 +37,7 @@ export class LoginRegisterService {
     } catch (err) {
       console.log(err);
 
-      this.dispatchNotification(`Error ${err.status} while getting profile data`, 'error');
+      this.dispatchNotification(`Error ${err.status} while sending register form`, 'error');
     }
   }
 
@@ -57,7 +57,12 @@ export class LoginRegisterService {
     } catch (err) {
       console.log(err);
 
-      this.dispatchNotification(`Error ${err.status} while getting profile data`, 'error');
+      if (err.status === 401) {
+        this.dispatchNotification(err.error, 'error');
+        return;
+      }
+
+      this.dispatchNotification(err.error[0].msg || err.error, 'error');
     }
   }
 

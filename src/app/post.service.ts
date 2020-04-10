@@ -30,7 +30,7 @@ export class PostService {
         // User is not logged in
         this.router.navigate(['/login']);
 
-        this.dispatchNotification('Your session has expired. Please, login.', 'error');
+        this.dispatchNotification(err.error, 'error');
       }
       else {
         console.log(err);
@@ -49,7 +49,7 @@ export class PostService {
         // User is not logged in
         this.router.navigate(['/login']);
 
-        this.dispatchNotification('Your session has expired. Please, login.', 'error');
+        this.dispatchNotification(err.error, 'error');
       }
       else {
         console.log(err);
@@ -68,7 +68,7 @@ export class PostService {
         // User is not logged in
         this.router.navigate(['/login']);
 
-        this.dispatchNotification('Your session has expired. Please, login.', 'error');
+        this.dispatchNotification(err.error, 'error');
       }
       else {
         console.log(err);
@@ -87,7 +87,7 @@ export class PostService {
         // User is not logged in
         this.router.navigate(['/login']);
 
-        this.dispatchNotification('Your session has expired. Please, login.', 'error');
+        this.dispatchNotification(err.error, 'error');
       }
       else {
         console.log(err);
