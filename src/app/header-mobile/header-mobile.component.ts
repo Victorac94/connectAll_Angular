@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 
 import { IAppState } from '../redux/store/store';
 import { capitalize } from '../share/utility';
-import * as actions from '../redux/actions/actions';
 
 @Component({
   selector: 'app-header',
@@ -37,24 +36,9 @@ export class HeaderMobileComponent implements OnInit {
 
   // Navigate between different categories
   navigateTo(value) {
-    let catName = value;
-
-    if (value !== 'all') {
-      value = value.split('/');
-      catName = value[0];
-    }
+    value = value.split('/');
 
     this.router.navigate(['/category', ...value]);
-
-    this.ngRedux.dispatch({
-      type: actions.SET_CURRENT_CATEGORY,
-      data: catName
-    })
-
-    this.ngRedux.dispatch({
-      type: actions.SET_CURRENT_FEED_URL,
-      data: '/category/' + value.join('/')
-    })
   }
 
   logout() {

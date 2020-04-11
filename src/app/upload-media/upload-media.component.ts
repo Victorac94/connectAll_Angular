@@ -2,12 +2,9 @@
 import { Component, OnInit, Input, ChangeDetectorRef, Output, EventEmitter } from '@angular/core';
 import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { NgRedux } from '@angular-redux/store';
 
 import { Observable } from 'rxjs';
 import { finalize, tap } from 'rxjs/operators';
-import { IAppState } from '../redux/store/store';
-import * as actions from '../redux/actions/actions';
 
 @Component({
   selector: 'app-upload-media',
@@ -31,7 +28,6 @@ export class UploadMediaComponent implements OnInit {
   constructor(
     private storage: AngularFireStorage,
     private db: AngularFirestore,
-    private ngRedux: NgRedux<IAppState>
   ) {
     this.downloadMediaUrl = new EventEmitter();
     this.uploadTask = new EventEmitter();

@@ -1,12 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { NgRedux } from '@angular-redux/store';
 
 import { PostService } from '../post.service';
 import { formatTime, capitalize } from '../share/utility';
 import { CategoryService } from '../category.service';
 import { ProfileService } from '../profile.service';
-import { IAppState } from '../redux/store/store';
-import * as actions from '../redux/actions/actions';
 
 @Component({
   selector: 'app-search',
@@ -26,7 +23,6 @@ export class SearchComponent implements OnInit {
     private categoryService: CategoryService,
     private postService: PostService,
     private profileService: ProfileService,
-    private ngRedux: NgRedux<IAppState>
   ) {
     this.formatTime = formatTime;
     this.capitalize = capitalize;
@@ -63,17 +59,4 @@ export class SearchComponent implements OnInit {
     this.currentlySearching = value;
   }
 
-  setCurrentViewCategory(view, category = null) {
-    this.ngRedux.dispatch({
-      type: actions.SET_CURRENT_VIEW,
-      data: view
-    });
-
-    if (category) {
-      this.ngRedux.dispatch({
-        type: actions.SET_CURRENT_CATEGORY,
-        data: category
-      })
-    }
-  }
 }

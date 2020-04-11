@@ -1,11 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { NgRedux } from '@angular-redux/store';
 
 import { PostService } from '../post.service';
 import { formatTime, capitalize } from '../share/utility';
-import { IAppState } from '../redux/store/store';
-import * as actions from '../redux/actions/actions';
 
 @Component({
   selector: 'app-post',
@@ -25,7 +22,6 @@ export class PostComponent implements OnInit {
   constructor(
     private postService: PostService,
     private activatedRoute: ActivatedRoute,
-    private ngRedux: NgRedux<IAppState>
   ) {
     this.formatTime = formatTime;
     this.capitalize = capitalize;
@@ -54,17 +50,4 @@ export class PostComponent implements OnInit {
     this.feed = await this.postService.getPostsByCategory(categoryId);
   }
 
-  setCurrentViewCategory(view, category = null) {
-    this.ngRedux.dispatch({
-      type: actions.SET_CURRENT_VIEW,
-      data: view
-    });
-
-    if (category) {
-      this.ngRedux.dispatch({
-        type: actions.SET_CURRENT_CATEGORY,
-        data: category
-      })
-    }
-  }
 }

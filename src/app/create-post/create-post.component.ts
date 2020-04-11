@@ -96,16 +96,6 @@ export class CreatePostComponent implements OnInit, DoCheck {
         this.router.navigate(['/category', goToCategory.category_name, goToCategory.id]);
 
         this.ngRedux.dispatch({
-          type: actions.SET_CURRENT_VIEW,
-          data: 'category'
-        });
-
-        this.ngRedux.dispatch({
-          type: actions.SET_CURRENT_CATEGORY,
-          data: goToCategory.category_name
-        })
-
-        this.ngRedux.dispatch({
           type: actions.SET_NOTIFICATION_MESSAGE,
           data: 'Post created successfully',
           notificationType: 'success'

@@ -59,15 +59,4 @@ export class CategoryComponent implements OnInit {
     this.loadCatFeed.emit({ catId: id, catName: name });
   }
 
-  setCurrentViewCategory(view, categoryName) {
-    this.ngRedux.dispatch({
-      type: actions.SET_CURRENT_VIEW,
-      data: view
-    })
-
-    this.ngRedux.dispatch({
-      type: actions.SET_CURRENT_CATEGORY,
-      data: categoryName
-    })
-  }
 }

@@ -2,16 +2,19 @@
     <article *ngFor="let post of feed">
         <header>
             <div class="img-wrapper">
-                <img [src]="post.user_picture" [routerLink]="['/user', post.user_id]"
-                    (click)="setCurrentViewCategory('user')">
+                <img [src]="post.user_picture" [routerLink]="['/user', post.user_id]">
             </div>
             <div class="name-date">
-                <p [routerLink]="['/user', post.user_id]" (click)="setCurrentViewCategory('user')">{{post.user_name}}
-                    {{post.user_last_name}}</p>
-                <span>{{formatTime(post.post_creation_date)}}</span>
+                <p [routerLink]="['/user', post.user_id]">
+                    {{post.user_name}} {{post.user_last_name}}
+                </p>
+                <span>
+                    {{formatTime(post.post_creation_date)}}
+                </span>
             </div>
-            <p [routerLink]="['/category', post.category_name, post.category_id]"
-                (click)="setCurrentViewCategory('category', post.category_name)">{{capitalize(post.category_name)}}</p>
+            <p [routerLink]="['/category', post.category_name, post.category_id]">
+                {{capitalize(post.category_name)}}
+            </p>
         </header>
         <main>
             <p>{{post.post_body}}</p>

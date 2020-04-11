@@ -4,7 +4,6 @@ import { NgRedux } from '@angular-redux/store';
 import { IAppState } from '../redux/store/store';
 import * as actions from '../redux/actions/actions';
 import { ProfileService } from '../profile.service';
-import { Router } from '@angular/router';
 import { capitalize } from '../share/utility';
 
 @Component({
@@ -21,7 +20,6 @@ export class HomeComponent implements OnInit {
   capitalize: any;
 
   constructor(
-    private router: Router,
     private profileService: ProfileService,
     private ngRedux: NgRedux<IAppState>
   ) {
@@ -49,57 +47,9 @@ export class HomeComponent implements OnInit {
         data: profile
       })
 
-      this.setCategory();
-      this.setCurrentView();
     } catch (err) {
       this.infoLoaded = false;
     }
   }
 
-  setCategory() {
-    const url = this.router.url.split('/'); // ['', 'category', 'all']
-
-    if (url[1] === 'category') {
-      this.ngRedux.dispatch({
-        type: actions.SET_CURRENT_CATEGORY,
-        data: url[2]
-      })
-    }
-  }
-
-  setCurrentView(value = '') {
-    // If we call this function from the ngOnInit() then get the value from the current URL
-    if (value === '') {
-      value = this.router.url.split('/')[1]; // ['', 'category', 'all']
-    }
-    let view = '';
-
-    switch (value) {
-      case 'category':
-        view = 'category';
-        break;
-      case 'search':
-        view = 'search';
-        break;
-      case 'add-post':
-        view = 'addPost';
-        break;
-      case 'chats':
-        view = 'chats';
-        break;
-      case 'profile':
-        view = 'profile';
-        break;
-      case 'user':
-        view = 'user';
-        break;
-      default:
-        view = 'default case in switch'
-    }
-
-    this.ngRedux.dispatch({
-      type: actions.SET_CURRENT_VIEW,
-      data: view
-    });
-  }
 }

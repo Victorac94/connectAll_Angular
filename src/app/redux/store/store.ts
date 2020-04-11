@@ -21,9 +21,9 @@ export const INITIAL_STATE: IAppState = {
     allCategories: [],
     myCategories: [],
     myBasicInfo: {},
-    currentView: '',
+    currentView: 'category',
     currentCategory: 'all',
     currentSearch: '',
-    currentFeedUrl: '',
+    currentFeedUrl: '/category/all',
 }
 

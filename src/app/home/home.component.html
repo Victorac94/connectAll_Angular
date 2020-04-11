@@ -11,22 +11,22 @@
         <div class="main-header" *ngIf="currentView && currentCategory" [ngSwitch]="currentView">
             <div *ngSwitchCase="'category'">
                 <h4>{{capitalize(currentCategory)}}</h4>
-                <a [routerLink]="['/add-post']" (click)="setCurrentView('add-post')">Create post</a>
+                <a [routerLink]="['/add-post']">Create post</a>
             </div>
             <div *ngSwitchCase="'search'">
                 <h4>Search</h4>
-                <a [routerLink]="['/add-post']" (click)="setCurrentView('add-post')">Create post</a>
+                <a [routerLink]="['/add-post']">Create post</a>
             </div>
-            <div *ngSwitchCase="'addPost'">
+            <div *ngSwitchCase="'add-post'">
                 <h4>Create post</h4>
             </div>
             <div *ngSwitchCase="'user'">
                 <h4>User</h4>
-                <a [routerLink]="['/add-post']" (click)="setCurrentView('add-post')">Create post</a>
+                <a [routerLink]="['/add-post']">Create post</a>
             </div>
             <div *ngSwitchCase="'profile'">
                 <h4>Profile</h4>
-                <a [routerLink]="['/add-post']" (click)="setCurrentView('add-post')">Create post</a>
+                <a [routerLink]="['/add-post']">Create post</a>
             </div>
         </div>
         <router-outlet></router-outlet>
