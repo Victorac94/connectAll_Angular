@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 
 import { CategoryService } from '../category.service';
 import { capitalize } from '../share/utility';
@@ -13,10 +13,9 @@ import * as actions from '../redux/actions/actions';
 })
 export class CategoryComponent implements OnInit {
 
+  @Input() category: any;
+  @Input() canUnfollow: boolean;
   @Output() loadCatFeed: EventEmitter<any>;
-
-  allCategories: any[];
-  myCategories: any[];
 
   capitalize: any; // Function that capitalizes a string
 
@@ -29,28 +28,12 @@ export class CategoryComponent implements OnInit {
   }
 
   async ngOnInit() {
-    // Listen for changes in the redux store and update variables according to them
-    this.ngRedux.subscribe(async () => {
-      const state = await this.ngRedux.getState();
-
-      this.allCategories = state.allCategories;
-      this.myCategories = state.myCategories;
-    })
-
     // Get all existing categories
     const allCategories = await this.categoryService.getAll();
 
     this.ngRedux.dispatch({
-      type: actions.LOAD_ALL_CATEGORIES,
+      type: actions.SET_ALL_CATEGORIES,
       data: allCategories
-    });
-
-    // Get the categories the current user follows
-    const myCategories = await this.categoryService.getUserCategories();
-
-    this.ngRedux.dispatch({
-      type: actions.LOAD_MY_CATEGORIES,
-      data: myCategories
     });
   }
 
@@ -59,4 +42,18 @@ export class CategoryComponent implements OnInit {
     this.loadCatFeed.emit({ catId: id, catName: name });
   }
 
+  async unfollowCategory(catId) {
+    const response = await this.categoryService.unfollowCategory(catId);
+    console.log(response);
+
+    if (response.affectedRows === 1) {
+      console.log('Categoria borrada con éxito!');
+      const userCategories = this.ngRedux.getState().myCategories.filter(cat => cat.id != catId);
+
+      this.ngRedux.dispatch({
+        type: actions.DELETE_CATEGORY,
+        data: userCategories
+      });
+    }
+  }
 }

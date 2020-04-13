@@ -5,6 +5,7 @@ import { IAppState } from '../redux/store/store';
 import * as actions from '../redux/actions/actions';
 import { ProfileService } from '../profile.service';
 import { capitalize } from '../share/utility';
+import { CategoryService } from '../category.service';
 
 @Component({
   selector: 'app-home',
@@ -20,6 +21,7 @@ export class HomeComponent implements OnInit {
   capitalize: any;
 
   constructor(
+    private categoryService: CategoryService,
     private profileService: ProfileService,
     private ngRedux: NgRedux<IAppState>
   ) {
@@ -32,9 +34,6 @@ export class HomeComponent implements OnInit {
 
   async ngOnInit() {
     try {
-      const profile = await this.profileService.getMyBasicInfo();
-      this.infoLoaded = true;
-
       this.ngRedux.subscribe(() => {
         const state = this.ngRedux.getState();
 
@@ -42,9 +41,18 @@ export class HomeComponent implements OnInit {
         this.currentCategory = state.currentCategory;
       })
 
+      const profile = await this.profileService.getMyBasicInfo();
+      const myCategories = await this.categoryService.getUserCategories();
+      this.infoLoaded = true;
+
       this.ngRedux.dispatch({
         type: actions.MY_BASIC_INFO,
         data: profile
+      })
+
+      this.ngRedux.dispatch({
+        type: actions.SET_MY_CATEGORIES,
+        data: myCategories
       })
 
     } catch (err) {

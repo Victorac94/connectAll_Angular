@@ -50,9 +50,9 @@ export class CategoryService {
     }
   }
 
-  async deleteUserCategories(delCategories) {
+  async unfollowCategory(categoryId) {
     try {
-      const headers = localStorage.getItem('user-token') ? this.createHeaders(null, delCategories) : { headers: null };
+      const headers = localStorage.getItem('user-token') ? this.createHeaders(null, categoryId) : { headers: null };
       return await this.httpClient.delete<any>(this.baseUrl + '/user', headers).toPromise();
     } catch (err) {
       if (err.status === 401) {

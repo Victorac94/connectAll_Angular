@@ -1,31 +1,49 @@
-.header
+article
+    display: flex
+    justify-content: flex-start
+    align-items: center
+    color: #555
+    padding: 0.4em 0.2em
+    margin: 0.4em 0
+    cursor: pointer
+
+    &:hover
+        background-color: #fbfeff
+
+        svg
+            display: inline-block
+
+    img
+        margin-left: 0.4em
+        margin-right: 0.8em
+        width: 1.1em
+        height: auto
+    
+
+article.profile
+    position: relative
     display: flex
     justify-content: space-between
     align-items: center
-    padding: 0.5em
+    color: #444
     border-radius: 5px
-    color: white
-    background-color: #7D67F7
+    padding: 0.4em
+    margin: 0.4em 0
+    cursor: default
+    &:hover
+        background-color: #EEF9FE
 
-    .icon
+        svg
+            opacity: 1
+    
+    svg
+        opacity: 0
         width: 1em
-        fill: white
+        margin-left: 1em
+        color: #ff4444
         cursor: pointer
 
-.categories
-    padding-top: 0.5em
-    article
-        display: flex
-        justify-content: flex-start
-        align-items: center
-        color: #555
-        padding: 0.4em 0.2em
-        margin: 0.4em 0
-        cursor: pointer
-        &:hover
-            color: #666
-
-        img
-            margin-right: 1em
-            width: 1.1em
-            height: auto
+    img
+        margin-right: 1em
+        width: 1.1em
+        height: auto

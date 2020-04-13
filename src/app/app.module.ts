@@ -23,6 +23,7 @@ import { UploadMediaComponent } from './upload-media/upload-media.component';
 
 import { IAppState, INITIAL_STATE } from './redux/store/store';
 import { rootReducer } from './redux/reducers/reducer';
+import { FeedComponent } from './feed/feed.component';
 
 const firebaseConfig = {
   apiKey: "AIzaSyA1n-AtdJil_EaSaPy0APXyrzUGfgC72d4",
@@ -47,7 +48,8 @@ const firebaseConfig = {
     SearchComponent,
     NavMobileComponent,
     LeftBarDesktopComponent,
-    UploadMediaComponent
+    UploadMediaComponent,
+    FeedComponent
   ],
   imports: [
     BrowserModule,

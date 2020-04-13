@@ -31,7 +31,7 @@ export class LoginRegisterService {
         data: response.user
       });
 
-      this.router.navigate(['/home']);
+      this.router.navigate(['/category', 'all']);
 
       this.dispatchNotification(`Welcome to ConnectAll ${response.user.user_name}!`, 'info');
     } catch (err) {
@@ -51,7 +51,7 @@ export class LoginRegisterService {
         data: response.user
       });
 
-      this.router.navigate(['/home']);
+      this.router.navigate(['/category', 'all']);
 
       this.dispatchNotification(`Welcome back, ${response.user.user_name}`, 'info');
     } catch (err) {

@@ -20,32 +20,11 @@
     <main>
         <!-- SEARCHING FOR CATEGORIES -->
         <section class="categories" *ngIf="searchResults && currentlySearching === 'categories'">
-            <article *ngFor="let category of searchResults"
-                [routerLink]="['/category', category.category_name, category.id]">
-                <img [src]="category.category_icon" alt="category.category_name">
-                <p>{{capitalize(category.category_name)}}</p>
-            </article>
+            <app-category *ngFor="let category of searchResults" [category]="category"></app-category>
         </section>
         <!-- SEARCHING FOR POSTS -->
         <section class="posts" *ngIf="searchResults && currentlySearching === 'posts'">
-            <article *ngFor="let post of searchResults">
-                <header>
-                    <div class="img-wrapper">
-                        <img [src]="post.user_picture" [routerLink]="['/user', post.user_id]">
-                    </div>
-                    <div class="name-date">
-                        <p [routerLink]="['/user', post.user_id]">
-                            {{post.user_name}} {{post.user_last_name}}</p>
-                        <span>{{formatTime(post.post_creation_date)}}</span>
-                    </div>
-                    <p [routerLink]="['/category', post.category_name, post.category_id]">
-                        {{capitalize(post.category_name)}}</p>
-                </header>
-                <main>
-                    <p>{{post.post_body}}</p>
-                    <img *ngIf="post.post_picture" [src]="post.post_picture">
-                </main>
-            </article>
+            <app-post *ngFor="let post of searchResults" [post]="post"></app-post>
         </section>
         <!-- SEARCHING FOR USERS -->
         <section class="users" *ngIf="searchResults && currentlySearching === 'users'">

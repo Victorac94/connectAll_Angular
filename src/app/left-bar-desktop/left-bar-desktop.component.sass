@@ -4,6 +4,7 @@ h1
     margin: 1em 0
     margin-top: 0
     text-align: center
+    cursor: pointer
 
 .search
     display: flex
@@ -11,7 +12,6 @@ h1
     align-items: center
     padding: 0.7em 1em
     color: #7dc4ff
-    // border: 1px solid #7D67F7
     border: 1px solid #7dc4ff
     border-radius: 5px
     background-color: white
@@ -28,30 +28,72 @@ h1
 
 .container
     margin: 2em 0
-    border: 1px solid #7dc4ff
     border-radius: 5px
     overflow: hidden
-    background-color: white
 
-    .profile,
-    .logout
-        padding: 0.7em 1em
-        border-bottom: 1px solid #7dc4ff
-        display: flex
-        align-items: center
-        cursor: pointer
+    .profile-logout
+        border: 1px solid #7dc4ff
+        border-radius: 5px
+        overflow: hidden
+        background-color: white
 
-        &:hover
-            background-color: #fbfeff
+        .profile,
+        .logout
+            padding: 0.7em 1em
+            display: flex
+            align-items: center
+            cursor: pointer
 
-        &:last-child
-            border-bottom: none
+            &:hover
+                background-color: #fbfeff
 
-        img
-            width: 1.6em
-            height: 1.6em
-            border-radius: 50%
-            margin-right: 1em
+            img
+                width: 1.6em
+                height: 1.6em
+                border-radius: 50%
+                margin-right: 1em
 
-        h4
-            color: #666
+            h4
+                color: #666
+
+        .profile
+            border-bottom: 1px solid #7dc4ff
+        
+    .categories-container
+        margin-top: 1.7em
+        border-radius: 5px
+        background-color: white
+        overflow: hidden
+
+        .categories-header
+            display: flex
+            justify-content: space-between
+            align-items: center
+            padding: 0.5em
+            color: white
+            background-color: #7D67F7
+
+        .categories-list
+            background-color: white
+            border: 1px solid #7dc4ff
+            border-top: none 
+            border-bottom-left-radius: 5px
+            border-bottom-right-radius: 5px
+            overflow: hidden
+            
+            article
+                display: flex
+                justify-content: flex-start
+                align-items: center
+                color: #555
+                padding: 0.4em 0.2em
+                margin: 0.4em 0
+                cursor: pointer
+                &:hover
+                    background-color: #fbfeff
+
+                img
+                    margin-left: 0.4em
+                    margin-right: 0.8em
+                    width: 1.1em
+                    height: auto
