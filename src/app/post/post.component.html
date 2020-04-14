@@ -1,7 +1,7 @@
 <article>
     <header>
-        <div class="img-wrapper">
-            <img [src]="post.user_picture" [routerLink]="['/user', post.user_id]">
+        <div class="profile-image" [routerLink]="['/user', post.user_id]"
+            [ngStyle]="{'background-image': 'url(' + post.user_picture + ')', 'background-size': 'cover', 'background-position': 'center'}">
         </div>
         <div class="name-date">
             <p [routerLink]="['/user', post.user_id]">

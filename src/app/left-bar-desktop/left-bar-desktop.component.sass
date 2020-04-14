@@ -1,99 +1,118 @@
-h1
-    color: #3d29ac
-    font-size: 2.2rem
-    margin: 1em 0
-    margin-top: 0
-    text-align: center
-    cursor: pointer
+.container1
+    padding-top: 1em
+    position: sticky
+    top: 0
 
-.search
-    display: flex
-    justify-content: center
-    align-items: center
-    padding: 0.7em 1em
-    color: #7dc4ff
-    border: 1px solid #7dc4ff
-    border-radius: 5px
-    background-color: white
-    cursor: pointer
+    h1
+        color: #3d29ac
+        font-size: 2.2rem
+        margin: 1em 0
+        margin-top: 0
+        text-align: center
+        cursor: pointer
 
-    svg
-        width: 1.6em
-        height: 1.6em
-        fill: #7dc4ff
-        margin-right: 1em
-
-    &:hover
-        background-color: #fbfeff
-
-.container
-    margin: 2em 0
-    border-radius: 5px
-    overflow: hidden
-
-    .profile-logout
+    .search
+        display: flex
+        justify-content: center
+        align-items: center
+        padding: 0.7em 1em
+        color: #7dc4ff
         border: 1px solid #7dc4ff
         border-radius: 5px
-        overflow: hidden
         background-color: white
+        cursor: pointer
+        outline: none
 
-        .profile,
-        .logout
-            padding: 0.7em 1em
-            display: flex
-            align-items: center
-            cursor: pointer
+        svg
+            width: 1.6em
+            height: 1.6em
+            fill: #7dc4ff
+            margin-right: 1em
 
-            &:hover
-                background-color: #fbfeff
+        &:hover
+            background-color: #f2fcff
 
-            img
-                width: 1.6em
-                height: 1.6em
-                border-radius: 50%
-                margin-right: 1em
-
-            h4
-                color: #666
-
-        .profile
-            border-bottom: 1px solid #7dc4ff
-        
-    .categories-container
-        margin-top: 1.7em
+    .container
+        margin: 2em 0
         border-radius: 5px
-        background-color: white
         overflow: hidden
 
-        .categories-header
-            display: flex
-            justify-content: space-between
-            align-items: center
-            padding: 0.5em
-            color: white
-            background-color: #7D67F7
-
-        .categories-list
-            background-color: white
+        .profile-logout
             border: 1px solid #7dc4ff
-            border-top: none 
-            border-bottom-left-radius: 5px
-            border-bottom-right-radius: 5px
+            border-radius: 5px
             overflow: hidden
-            
-            article
-                display: flex
-                justify-content: flex-start
-                align-items: center
-                color: #555
-                padding: 0.4em 0.2em
-                margin: 0.4em 0
-                cursor: pointer
-                &:hover
-                    background-color: #fbfeff
+            background-color: white
 
+            .profile,
+            .logout
+                padding: 0.7em 1em
+                display: flex
+                align-items: center
+                cursor: pointer
+                outline: none
+
+                &:hover
+                    background-color: #f2fcff
+
+                .profile-image,
                 img
-                    margin-left: 0.4em
-                    margin-right: 0.8em
-                    width: 1.1em
-                    height: auto
+                    width: 1.6em
+                    height: 1.6em
+                    border-radius: 50%
+                    margin-right: 1em
+                
+                img
+                    border-radius: 0
+
+                h4
+                    color: #666
+
+            .profile
+                border-bottom: 1px solid #7dc4ff
+            
+            .my-profile
+                border-right: 2px solid #3cdd1c
+            
+        .categories-container
+            margin-top: 1.7em
+            border-radius: 5px
+            background-color: white
+            overflow: hidden
+
+            .categories-header
+                display: flex
+                justify-content: space-between
+                align-items: center
+                padding: 0.5em
+                color: white
+                background-color: #7D67F7
+
+            .categories-list
+                background-color: white
+                border: 1px solid #7dc4ff
+                border-top: none 
+                border-bottom-left-radius: 5px
+                border-bottom-right-radius: 5px
+                overflow: hidden
+                
+                article
+                    display: flex
+                    justify-content: flex-start
+                    align-items: center
+                    color: #555
+                    padding: 0.4em 0.2em
+                    margin: 0.4em 0
+                    cursor: pointer
+                    outline: none
+                    
+                    &:hover
+                        background-color: #f2fcff
+
+                    img
+                        margin-left: 0.4em
+                        margin-right: 0.8em
+                        width: 1.1em
+                        height: auto
+
+                .category-selected
+                    border-right: 2px solid #3cdd1c

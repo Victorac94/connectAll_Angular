@@ -11,6 +11,7 @@ import { IAppState } from '../redux/store/store';
 export class NavMobileComponent implements OnInit {
 
   currentFeedUrl: any;
+  profileInfo: any;
 
   constructor(
     private ngRedux: NgRedux<IAppState>,
@@ -21,7 +22,10 @@ export class NavMobileComponent implements OnInit {
       const state = this.ngRedux.getState();
 
       this.currentFeedUrl = state.currentFeedUrl;
+      this.profileInfo = state.myBasicInfo;
     })
+
+    this.profileInfo = this.ngRedux.getState().myBasicInfo;
   }
 
 }

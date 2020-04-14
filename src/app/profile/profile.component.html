@@ -9,9 +9,8 @@
                 </path>
             </svg>
         </div>
-        <div class="img-wrapper">
-            <img [src]="profileInfo.user.user_picture">
-            <span></span>
+        <div class="profile-image"
+            [ngStyle]="{'background-image': 'url(' + profileInfo.user.user_picture + ')', 'background-size': 'cover', 'background-position': 'center'}">
         </div>
         <div class="profile-data">
             <form [formGroup]="profileForm" (ngSubmit)="onSubmittingProfileChanges()" novalidate autocomplete="off">

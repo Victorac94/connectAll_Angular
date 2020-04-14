@@ -29,8 +29,8 @@
         <!-- SEARCHING FOR USERS -->
         <section class="users" *ngIf="searchResults && currentlySearching === 'users'">
             <article *ngFor="let user of searchResults">
-                <header>
-                    <img [src]="user.user_picture" [alt]="user.user_name + user.user_last_name + ' picture'">
+                <header
+                    [ngStyle]="{'background-image': 'url(' + user.user_picture + ')', 'background-size': 'cover', 'background-position': 'center'}">
                 </header>
                 <main>
                     <h4>{{user.user_name}} {{user.user_last_name}}</h4>

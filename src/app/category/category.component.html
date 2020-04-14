@@ -1,4 +1,5 @@
-<article [ngClass]="{'profile': canUnfollow}" [routerLink]="['/category', category.category_name, category.id]">
+<article [ngClass]="{'profile': canUnfollow}" [routerLink]="['/category', category.category_name, category.id]"
+    [routerLinkActive]="['category-selected']">
     <img [src]="category.category_icon" alt="category.category_name">
     <p>{{capitalize(category.category_name)}}</p>
     <svg *ngIf="canUnfollow" (click)="unfollowCategory(category.id)" aria-hidden="true" focusable="false"
