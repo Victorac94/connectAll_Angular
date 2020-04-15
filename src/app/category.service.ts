@@ -89,6 +89,18 @@ export class CategoryService {
     }
   }
 
+  // getCategoriesBySearch(value) {
+  //   const allCategories = this.ngRedux.getState().allCategories;
+
+  //   const searchResult = allCategories.filter(cat => {
+  //     const regex = new RegExp(value, 'gi');
+
+  //     return regex.test(cat.category_name);
+  //   })
+
+  //   return searchResult;
+  // }
+
   createHeaders(searchFor = '', categories = '') {
     return {
       headers: new HttpHeaders({

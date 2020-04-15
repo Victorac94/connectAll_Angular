@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { NgRedux } from '@angular-redux/store';
 
 import { PostService } from '../post.service';
 import { formatTime, capitalize } from '../share/utility';
 import { CategoryService } from '../category.service';
 import { ProfileService } from '../profile.service';
+import { IAppState } from '../redux/store/store';
+import * as actions from '../redux/actions/actions';
 
 @Component({
   selector: 'app-search',
@@ -23,15 +26,24 @@ export class SearchComponent implements OnInit {
     private categoryService: CategoryService,
     private postService: PostService,
     private profileService: ProfileService,
+    private ngRedux: NgRedux<IAppState>
   ) {
+    this.currentlySearching = '';
     this.formatTime = formatTime;
     this.capitalize = capitalize;
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.currentActive = document.querySelector('.search-by .active');
     this.currentlySearching = 'categories';
-    this.searchResults = null;
+
+    const allCategories = await this.categoryService.getAll();
+    this.searchResults = allCategories;
+
+    // this.ngRedux.dispatch({
+    //   type: actions.SET_ALL_CATEGORIES,
+    //   data: allCategories
+    // })
   }
 
   async search(value) {
@@ -49,7 +61,7 @@ export class SearchComponent implements OnInit {
   }
 
   // Toggle the class active which says what to search for and puts a green border on the search-item element
-  toggleActive(element, value) {
+  toggleActive(element, value, searchInput) {
     if (element == this.currentActive) return;
 
     this.currentActive.classList.remove('active');
@@ -57,6 +69,8 @@ export class SearchComponent implements OnInit {
 
     this.currentActive = element;
     this.currentlySearching = value;
+
+    this.search(searchInput.value);
   }
 
 }

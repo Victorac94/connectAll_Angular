@@ -1,18 +1,19 @@
 <section class="container">
     <div class="search-wrapper">
-        <input type="text" (input)="search($event.target.value)" [placeholder]="'Search ' + currentlySearching + '...'">
+        <input type="text" #searchInput (input)="search($event.target.value)"
+            [placeholder]="'Search ' + currentlySearching + '...'">
         <button class="search-button">Search</button>
     </div>
     <section class="search-by">
-        <article class="search-item active" (click)="toggleActive($event.currentTarget, 'categories')">
+        <article class="search-item active" (click)="toggleActive($event.currentTarget, 'categories', searchInput)">
             <img src="../../assets/images/shapes-solid.svg" alt="category">
             <p>Categories</p>
         </article>
-        <article class="search-item" (click)="toggleActive($event.currentTarget, 'posts')">
+        <article class="search-item" (click)="toggleActive($event.currentTarget, 'posts', searchInput)">
             <img src="../../assets/images/newspaper.svg" alt="post">
             <p>Posts</p>
         </article>
-        <article class="search-item" (click)="toggleActive($event.currentTarget, 'users')">
+        <article class="search-item" (click)="toggleActive($event.currentTarget, 'users', searchInput)">
             <img src="../../assets/images/user-solid.svg" alt="user">
             <p>Users</p>
         </article>
@@ -39,5 +40,6 @@
                 </main>
             </article>
         </section>
+        <p class="no-match" *ngIf="searchResults?.length === 0">No matched {{currentlySearching}}</p>
     </main>
 </section>

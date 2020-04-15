@@ -77,7 +77,6 @@ export class CreatePostComponent implements OnInit, DoCheck {
   }
 
   async submitPost(mediaUrl = null) {
-    console.log('submitPost()');
     if (this.checkTextArea(this.postBody) === true) {
       // Create the Post
       const post = {
@@ -142,7 +141,11 @@ export class CreatePostComponent implements OnInit, DoCheck {
 
     this.file = files.item(0);
 
-    console.log(files.item(0));
+    console.log(this.file);
+  }
+
+  removeFile() {
+    this.file = null;
   }
 
   // Check that the body of the post is not empty. If it is empty, user cannot submit the post

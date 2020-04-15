@@ -27,7 +27,7 @@ export class LoginRegisterService {
       localStorage.setItem('user-token', response.token);
 
       this.ngRedux.dispatch({
-        type: actions.MY_BASIC_INFO,
+        type: actions.SET_MY_BASIC_INFO,
         data: response.user
       });
 
@@ -47,7 +47,7 @@ export class LoginRegisterService {
       localStorage.setItem('user-token', response.token);
       console.log(response)
       this.ngRedux.dispatch({
-        type: actions.MY_BASIC_INFO,
+        type: actions.SET_MY_BASIC_INFO,
         data: response.user
       });
 

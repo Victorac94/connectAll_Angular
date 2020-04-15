@@ -29,12 +29,12 @@ export class CategoryComponent implements OnInit {
 
   async ngOnInit() {
     // Get all existing categories
-    const allCategories = await this.categoryService.getAll();
+    // const allCategories = await this.categoryService.getAll();
 
-    this.ngRedux.dispatch({
-      type: actions.SET_ALL_CATEGORIES,
-      data: allCategories
-    });
+    // this.ngRedux.dispatch({
+    //   type: actions.SET_ALL_CATEGORIES,
+    //   data: allCategories
+    // });
   }
 
   // Load feed depending on the selected category

@@ -6,6 +6,7 @@ import { NgRedux } from '@angular-redux/store';
 
 import { formatTime, capitalize } from '../share/utility';
 import { IAppState } from '../redux/store/store';
+import * as actions from '../redux/actions/actions';
 
 @Component({
   selector: 'app-profile',
@@ -92,13 +93,12 @@ export class ProfileComponent implements OnInit {
   async onSubmittingProfileChanges() {
     const profile = {
       ...this.profileInfo.user,
-      name: this.profileForm.controls.name.value,
-      last_name: this.profileForm.controls.lastName.value,
-      email: this.profileForm.controls.email.value
+      user_name: this.profileForm.controls.name.value,
+      user_last_name: this.profileForm.controls.lastName.value,
+      user_email: this.profileForm.controls.email.value
     }
 
     const response = await this.profileService.updateProfileInfo(profile);
-    console.log(response);
 
     if (response.affectedRows === 1) {
       // Focus the submit button to remove the autocomplete box from the input fields 
@@ -109,6 +109,12 @@ export class ProfileComponent implements OnInit {
       setTimeout(() => {
         this.editing = false
       }, 0);
+
+      // Update myBasicInfo redux state
+      this.ngRedux.dispatch({
+        type: actions.SET_MY_BASIC_INFO,
+        data: { ...profile }
+      });
     }
   }
 

@@ -1,7 +1,7 @@
 <section class="container" *ngIf="myInfo && myCategories">
     <header>
-        <div class="profile-picture">
-            <img [src]="myInfo.user_picture">
+        <div class="profile-picture"
+            [ngStyle]="{'background-image': 'url(' + myInfo.user_picture + ')', 'background-size': 'cover', 'background-position': 'center'}">
         </div>
         <div class="upload">
             <img src="../../assets/images/image-solid.svg" alt="upload photo">
@@ -21,6 +21,17 @@
                 viewBox='0 0 512 512'>
                 <path
                     d='M476.59,227.05l-.16-.07L49.35,49.84A23.56,23.56,0,0,0,27.14,52,24.65,24.65,0,0,0,16,72.59V185.88a24,24,0,0,0,19.52,23.57l232.93,43.07a4,4,0,0,1,0,7.86L35.53,303.45A24,24,0,0,0,16,327V440.31A23.57,23.57,0,0,0,26.59,460a23.94,23.94,0,0,0,13.22,4,24.55,24.55,0,0,0,9.52-1.93L476.4,285.94l.19-.09a32,32,0,0,0,0-58.8Z' />
+            </svg>
+        </div>
+        <div class="media-preview" *ngIf="file">
+            <img src="../../assets/images/document.svg" alt="file">
+            <p>{{file.name}}</p>
+            <svg (click)="removeFile()" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="times"
+                class="remove-file svg-inline--fa fa-times fa-w-11" role="img" xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 352 512">
+                <path fill="#f72929"
+                    d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z">
+                </path>
             </svg>
         </div>
     </header>

@@ -46,7 +46,7 @@ export class HomeComponent implements OnInit {
       this.infoLoaded = true;
 
       this.ngRedux.dispatch({
-        type: actions.MY_BASIC_INFO,
+        type: actions.SET_MY_BASIC_INFO,
         data: profile
       })
 
