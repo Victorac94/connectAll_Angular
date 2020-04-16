@@ -1,7 +1,8 @@
-<article [ngClass]="{'profile': canUnfollow}" [routerLink]="['/category', category.category_name, category.id]"
-    [routerLinkActive]="['category-selected']">
-    <img [src]="category.category_icon" alt="category.category_name">
-    <p>{{capitalize(category.category_name)}}</p>
+<article [ngClass]="{'profile': canUnfollow}" [routerLinkActive]="['category-selected']">
+    <div class="category-wrapper" [routerLink]="['/category', category.category_name, category.id]">
+        <img [src]="category.category_icon" alt="category.category_name">
+        <p>{{capitalize(category.category_name)}}</p>
+    </div>
     <svg *ngIf="canUnfollow" (click)="unfollowCategory(category.id)" aria-hidden="true" focusable="false"
         data-prefix="fas" data-icon="minus" class="svg-inline--fa fa-minus fa-w-14" role="img"
         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">

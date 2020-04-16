@@ -52,7 +52,7 @@ export class CategoryService {
 
   async unfollowCategory(categoryId) {
     try {
-      const headers = localStorage.getItem('user-token') ? this.createHeaders(null, categoryId) : { headers: null };
+      const headers = localStorage.getItem('user-token') ? this.createHeaders('', categoryId) : { headers: null };
       return await this.httpClient.delete<any>(this.baseUrl + '/user', headers).toPromise();
     } catch (err) {
       if (err.status === 401) {
@@ -101,12 +101,12 @@ export class CategoryService {
   //   return searchResult;
   // }
 
-  createHeaders(searchFor = '', categories = '') {
+  createHeaders(searchFor = '', categoryId = '') {
     return {
       headers: new HttpHeaders({
         'user-token': localStorage.getItem('user-token'),
         'search-for': searchFor,
-        'delete-categories': JSON.stringify(categories)
+        'delete-category': JSON.stringify(categoryId)
       })
     }
   }

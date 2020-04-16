@@ -1,24 +1,30 @@
-article
+article,
+.category-wrapper
     display: flex
     justify-content: flex-start
     align-items: center
     color: #555
     padding: 0.4em 0.2em
     margin: 0.4em 0
-    cursor: pointer
-    outline: none
 
-    &:hover
-        background-color: #f2fcff
+    .category-wrapper
+        padding: 0
+        margin: 0
+        cursor: pointer
+        outline: none
+        width: 100%
 
         svg
             display: inline-block
 
-    img
-        margin-left: 0.4em
-        margin-right: 0.8em
-        width: 1.1em
-        height: auto
+        img
+            margin-left: 0.4em
+            margin-right: 0.8em
+            width: 1.1em
+            height: auto
+
+    &:hover
+        background-color: #f2fcff
 
 .category-selected
     border-right: 2px solid #3cdd1c
