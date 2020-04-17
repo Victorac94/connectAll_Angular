@@ -1,5 +1,6 @@
 <div class="container1">
     <h1 [routerLink]="['/category', 'all']">ConnectAll</h1>
+
     <article class="search" [routerLink]="['/search']">
         <svg xmlns='http://www.w3.org/2000/svg' width='512' height='512' viewBox='0 0 512 512'>
             <path
@@ -7,6 +8,7 @@
         </svg>
         <h4>Search</h4>
     </article>
+
     <section class="container">
         <div class="profile-logout" *ngIf="profileInfo">
             <article class="profile" [routerLink]="['/profile']" [routerLinkActive]="['my-profile']">
@@ -15,6 +17,7 @@
                 </div>
                 <h4>{{profileInfo.user_name}} {{profileInfo.user_last_name}}</h4>
             </article>
+
             <article class="logout" (click)="logout()">
                 <img src="../../assets/images/door-open-solid.svg" alt="Logout">
                 <h4>Logout</h4>
@@ -31,7 +34,9 @@
                     <img src="../../assets/images/shapes-solid.svg" alt="all">
                     <p>All</p>
                 </article>
-                <app-category *ngFor="let category of myCategories" [category]="category"></app-category>
+
+                <app-category *ngFor="let category of myCategories" [category]="category">
+                </app-category>
             </section>
         </div>
     </section>

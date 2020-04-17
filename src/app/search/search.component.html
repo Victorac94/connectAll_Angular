@@ -21,11 +21,14 @@
     <main>
         <!-- SEARCHING FOR CATEGORIES -->
         <section class="categories" *ngIf="searchResults && currentlySearching === 'categories'">
-            <app-category *ngFor="let category of searchResults" [category]="category"></app-category>
+            <app-category *ngFor="let category of searchResults"
+                (updateFollowCategories)="handleUpdateFollowCategories()" [category]="category"
+                [currentView]="'search'">
+            </app-category>
         </section>
         <!-- SEARCHING FOR POSTS -->
         <section class="posts" *ngIf="searchResults && currentlySearching === 'posts'">
-            <app-post *ngFor="let post of searchResults" [post]="post"></app-post>
+            <app-post *ngFor="let post of searchResults" [post]="post" [myBasicInfo]="myBasicInfo"></app-post>
         </section>
         <!-- SEARCHING FOR USERS -->
         <section class="users" *ngIf="searchResults && currentlySearching === 'users'">

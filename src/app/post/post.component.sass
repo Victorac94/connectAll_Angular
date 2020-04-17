@@ -44,6 +44,69 @@ article
             color: #fafafa
             cursor: pointer
 
+        .category-options
+            margin-left: auto
+            display: flex
+            flex-direction: column
+            justify-content: flex-start
+            align-items: flex-end
+
+            p
+                cursor: pointer
+
+            .options
+                background: transparent
+                border: none
+                position: relative
+                top: 7px
+                outline: none
+
+                .tooltip
+                    display: none
+
+                &:focus
+                    .tooltip
+                        display: flex
+                        justify-content: space-around
+                        position: absolute
+                        width: 9em
+                        top: 20px
+                        right: 0
+                        background-color: white
+                        border-radius: 5px
+                        color: #ff4444
+                        padding: 0.8em 0
+                        box-shadow: 1px 1px 5px #bbd7eb
+
+                        svg
+                            width: 1.1em
+                            height: auto
+                            fill: #ff4444
+                
+                        &:hover
+                            background-color: #f2fcff
+
+                            &::after
+                                background-color: #f2fcff
+                        
+                        &::after
+                            content: ''
+                            display: block
+                            width: 10px
+                            height: 10px
+                            border-top-right-radius: 2px
+                            background-color: white
+                            position: absolute
+                            top: -5px
+                            right: 7.5px
+                            transform: rotateZ(-45deg)
+                
+                svg
+                    width: 1.1em
+                    height: auto
+                    fill: white
+                    cursor: pointer
+
     main
         padding: 1em
         border: 1px solid rgb(186, 215, 251)

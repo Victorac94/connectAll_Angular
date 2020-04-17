@@ -68,7 +68,7 @@ export class ProfileComponent implements OnInit {
         return;
       };
 
-      // Get profile information
+      // Get whole profile information (user info, categories, posts)
       this.profileInfo = await this.profileService.getProfile(params.userId || myUserId);
 
       // If user is visiting it's own profile grant access to edit the profile

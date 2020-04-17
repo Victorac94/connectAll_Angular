@@ -18,6 +18,8 @@ export class SearchComponent implements OnInit {
   currentActive: any;
   currentlySearching: string;
   searchResults: any;
+  myCategories: any;
+  myBasicInfo: any;
 
   formatTime: any;
   capitalize: any;
@@ -29,39 +31,69 @@ export class SearchComponent implements OnInit {
     private ngRedux: NgRedux<IAppState>
   ) {
     this.currentlySearching = '';
+    this.myCategories = [];
     this.formatTime = formatTime;
     this.capitalize = capitalize;
   }
 
-  async ngOnInit() {
+  async ngOnInit(): Promise<any> {
+    const state = this.ngRedux.getState();
     this.currentActive = document.querySelector('.search-by .active');
     this.currentlySearching = 'categories';
 
     const allCategories = await this.categoryService.getAll();
-    this.searchResults = allCategories;
+    this.myCategories = state.myCategories;
+    this.myBasicInfo = state.myBasicInfo;
+    this.searchResults = this.isFollowingCategory(allCategories);
 
-    // this.ngRedux.dispatch({
-    //   type: actions.SET_ALL_CATEGORIES,
-    //   data: allCategories
-    // })
+    this.ngRedux.subscribe(() => {
+      const state = this.ngRedux.getState();
+
+      this.myCategories = state.myCategories;
+    });
   }
 
-  async search(value) {
+  async search(value): Promise<any> {
     switch (this.currentlySearching) {
       case 'categories':
-        this.searchResults = await this.categoryService.getCategoriesBySearch(value);
+        this.searchResults = null;
+        const response = await this.categoryService.getCategoriesBySearch(value);
+
+        this.searchResults = this.isFollowingCategory(response);
         break;
       case 'posts':
+        this.searchResults = null;
         this.searchResults = await this.postService.getPostsBySearch(value);
         break;
       case 'users':
+        this.searchResults = null;
         this.searchResults = await this.profileService.getProfilesBySearch(value);
         break;
     }
   }
 
+  handleUpdateFollowCategories() {
+    this.searchResults = this.isFollowingCategory(this.searchResults);
+  }
+
+  // Adds the boolean property 'following' to each category in the list received
+  isFollowingCategory(categories): any[] {
+    categories.forEach(cat => {
+      cat['following'] = false;
+
+      for (let c of this.myCategories) {
+        if (c.id === cat.id) {
+          cat['following'] = true;
+          break;
+        }
+      }
+    })
+
+    return categories;
+  }
+
   // Toggle the class active which says what to search for and puts a green border on the search-item element
-  toggleActive(element, value, searchInput) {
+  toggleActive(element, value, searchInput): void {
     if (element == this.currentActive) return;
 
     this.currentActive.classList.remove('active');

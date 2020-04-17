@@ -84,7 +84,6 @@ export class CreatePostComponent implements OnInit, DoCheck {
         picture: mediaUrl,
         fk_category: this.categoryIdSelected
       }
-      console.log(post);
 
       const response = await this.postService.createPost(post);
 
@@ -140,8 +139,6 @@ export class CreatePostComponent implements OnInit, DoCheck {
     }
 
     this.file = files.item(0);
-
-    console.log(this.file);
   }
 
   removeFile() {

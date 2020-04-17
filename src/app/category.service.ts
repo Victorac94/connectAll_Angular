@@ -50,6 +50,25 @@ export class CategoryService {
     }
   }
 
+  async followCategory(categoryId) {
+    try {
+      const headers = localStorage.getItem('user-token') ? this.createHeaders('', categoryId) : { headers: null };
+      const response = await this.httpClient.post<any>(this.baseUrl + '/follow', { categoryId: categoryId }, headers).toPromise();
+
+      return response;
+    } catch (err) {
+      if (err.status === 401) {
+        // User is not logged in
+        this.router.navigate(['/login']);
+
+        this.dispatchNotification(err.error, 'error');
+      }
+      else {
+        this.dispatchNotification(`Error ${err.status} while following the category`, 'error')
+      }
+    }
+  }
+
   async unfollowCategory(categoryId) {
     try {
       const headers = localStorage.getItem('user-token') ? this.createHeaders('', categoryId) : { headers: null };

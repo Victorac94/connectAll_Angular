@@ -63,14 +63,15 @@
             <h4>My Categories</h4>
         </header>
         <section class="categories">
-            <app-category *ngFor="let category of userCategories" [category]="category" [canUnfollow]="true">
+            <app-category *ngFor="let category of userCategories" [category]="category" [currentView]="'profile'">
             </app-category>
         </section>
         <header>
             <h4>My Posts</h4>
         </header>
         <section class="posts">
-            <app-post *ngFor="let post of profileInfo.posts" [post]="post"></app-post>
+            <app-post *ngFor="let post of profileInfo.posts" [post]="post" [myBasicInfo]="profileInfo.user">
+            </app-post>
         </section>
     </main>
 </section>

@@ -97,10 +97,30 @@ export class PostService {
     }
   }
 
-  createHeaders(value = '') {
+  async deletePost(post) {
+    try {
+      const headers = localStorage.getItem('user-token') ? this.createHeaders('', post) : { headers: null };
+      return await this.httpClient.delete<any>(this.baseUrl + '/delete', headers).toPromise();
+    } catch (err) {
+      if (err.status === 401) {
+        // User is not logged in
+        this.router.navigate(['/login']);
+
+        this.dispatchNotification(err.error, 'error');
+      }
+      else {
+        console.log(err);
+
+        this.dispatchNotification(`Error ${err.status} while deleting the post`, 'error');
+      }
+    }
+  }
+
+  createHeaders(value = '', post = '') {
     return {
       headers: new HttpHeaders({
         'user-token': localStorage.getItem('user-token'),
+        'post': JSON.stringify(post),
         'search-for': value
       })
     }

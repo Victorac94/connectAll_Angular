@@ -14,8 +14,9 @@ import * as actions from '../redux/actions/actions';
 export class CategoryComponent implements OnInit {
 
   @Input() category: any;
-  @Input() canUnfollow: boolean;
+  @Input() currentView: string;
   @Output() loadCatFeed: EventEmitter<any>;
+  @Output() updateFollowCategories: EventEmitter<any>;
 
   capitalize: any; // Function that capitalizes a string
 
@@ -25,6 +26,7 @@ export class CategoryComponent implements OnInit {
   ) {
     this.capitalize = capitalize;
     this.loadCatFeed = new EventEmitter();
+    this.updateFollowCategories = new EventEmitter();
   }
 
   ngOnInit() {
@@ -35,12 +37,26 @@ export class CategoryComponent implements OnInit {
     this.loadCatFeed.emit({ catId: id, catName: name });
   }
 
+  async followCategory(catId) {
+    const response = await this.categoryService.followCategory(catId);
+
+    if (response.affectedRows === 1) {
+      const userCategories = await this.categoryService.getUserCategories();
+
+      this.ngRedux.dispatch({
+        type: actions.SET_MY_CATEGORIES,
+        data: userCategories
+      });
+
+      this.updateFollowCategories.emit();
+    }
+  }
+
   async unfollowCategory(catId) {
     const response = await this.categoryService.unfollowCategory(catId);
     console.log(response);
 
     if (response.affectedRows === 1) {
-      console.log('Categoria borrada con éxito!');
       const userCategories = this.ngRedux.getState().myCategories.filter(cat => cat.id != catId);
 
       this.ngRedux.dispatch({

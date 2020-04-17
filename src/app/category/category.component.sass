@@ -6,6 +6,9 @@ article,
     color: #555
     padding: 0.4em 0.2em
     margin: 0.4em 0
+    
+    &:hover
+        background-color: #f2fcff
 
     .category-wrapper
         padding: 0
@@ -23,31 +26,28 @@ article,
             width: 1.1em
             height: auto
 
-    &:hover
-        background-color: #f2fcff
+    span
+        svg
+            width: 1.1em
+            height: auto
+        
+        .follow-icon
+            fill: #7dc4ff
+            cursor: pointer
 
 .category-selected
     border-right: 2px solid #3cdd1c
     
 
 article.profile
-    position: relative
-    display: flex
     justify-content: space-between
     align-items: center
     color: #444
     border-radius: 5px
     padding: 0.4em
-    margin: 0.4em 0
-    cursor: default
-    &:hover
-        background-color: #EEF9FE
+    box-shadow: 1px 1px 3px #EEF9FE, -1px -1px 3px #EEF9FE
 
-        svg
-            opacity: 1
-    
     svg
-        opacity: 0
         width: 1em
         margin-left: 1em
         color: #ff4444
@@ -57,3 +57,23 @@ article.profile
         margin-right: 1em
         width: 1.1em
         height: auto
+
+@media (min-width: 1025px)
+    article
+        .follow-icon
+            opacity: 0
+
+        &:hover
+            .follow-icon
+                opacity: 1 !important
+    
+    article.profile
+        border-color: transparent
+
+        svg
+            opacity: 0
+
+        &:hover
+            background-color: #EEF9FE
+            svg
+                opacity: 1

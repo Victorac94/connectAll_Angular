@@ -1,4 +1,4 @@
-<article>
+<article #postElement>
     <header>
         <div class="profile-image" [routerLink]="['/user', post.user_id]"
             [ngStyle]="{'background-image': 'url(' + post.user_picture + ')', 'background-size': 'cover', 'background-position': 'center'}">
@@ -11,9 +11,27 @@
                 {{formatTime(post.post_creation_date)}}
             </span>
         </div>
-        <p [routerLink]="['/category', post.category_name, post.category_id]">
-            {{capitalize(post.category_name)}}
-        </p>
+        <div class="category-options">
+            <p [routerLink]="['/category', post.category_name, post.category_id]">
+                {{capitalize(post.category_name)}}
+            </p>
+            <button *ngIf="myPost" class="options">
+                <svg xmlns='http://www.w3.org/2000/svg' width='512' height='512' viewBox='0 0 512 512'>
+                    <title>Options</title>
+                    <circle cx='256' cy='256' r='48' />
+                    <circle cx='416' cy='256' r='48' />
+                    <circle cx='96' cy='256' r='48' />
+                </svg>
+                <div class="tooltip" (click)="deletePost(post, postElement)">
+                    <svg xmlns='http://www.w3.org/2000/svg' width='512' height='512' viewBox='0 0 512 512'>
+                        <rect x='32' y='48' width='448' height='80' rx='32' ry='32' />
+                        <path
+                            d='M74.45,160a8,8,0,0,0-8,8.83L92.76,421.39a1.5,1.5,0,0,0,0,.22A48,48,0,0,0,140.45,464H371.54a48,48,0,0,0,47.67-42.39l0-.21,26.27-252.57a8,8,0,0,0-8-8.83ZM323.31,340.69a16,16,0,1,1-22.63,22.62L256,318.63l-44.69,44.68a16,16,0,0,1-22.63-22.62L233.37,296l-44.69-44.69a16,16,0,0,1,22.63-22.62L256,273.37l44.68-44.68a16,16,0,0,1,22.63,22.62L278.62,296Z' />
+                    </svg>
+                    <p>Delete post</p>
+                </div>
+            </button>
+        </div>
     </header>
     <main>
         <p>{{post.post_body}}</p>
