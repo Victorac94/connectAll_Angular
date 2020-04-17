@@ -21,6 +21,7 @@ export class CreatePostComponent implements OnInit, DoCheck {
   state: any;
   myInfo: any;
   myCategories: any;
+  currentCategory: string;
   textAreaNotEmpty: boolean;
   submittingPostWithMedia: boolean;
   postBody: any;
@@ -33,7 +34,6 @@ export class CreatePostComponent implements OnInit, DoCheck {
     private router: Router,
     private ngRedux: NgRedux<IAppState>
   ) {
-    console.log('Constructor');
     this.myInfo = {};
     this.myCategories = [];
     this.textAreaNotEmpty = false;
@@ -42,6 +42,8 @@ export class CreatePostComponent implements OnInit, DoCheck {
   }
 
   ngOnInit() {
+    this.currentCategory = this.ngRedux.getState().currentCategory;
+
     this.ngRedux.subscribe(() => {
       this.state = this.ngRedux.getState();
 

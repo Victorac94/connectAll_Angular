@@ -45,7 +45,7 @@ export class LoginRegisterService {
     try {
       const response = await this.httpClient.post<any>(this.baseUrl + '/users/login', form.value).toPromise()
       localStorage.setItem('user-token', response.token);
-      console.log(response)
+
       this.ngRedux.dispatch({
         type: actions.SET_MY_BASIC_INFO,
         data: response.user
