@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { NgRedux } from '@angular-redux/store';
 
+import { environment as env } from '../environments/environment';
 import { IAppState } from './redux/store/store';
 import * as actions from './redux/actions/actions';
 
@@ -18,7 +19,7 @@ export class CategoryService {
     private httpClient: HttpClient,
     private router: Router
   ) {
-    this.baseUrl = 'http://127.0.0.1:3000/api/categories';
+    this.baseUrl = env.baseUrl + '/categories';
   }
 
   async getAll() {

@@ -21,19 +21,10 @@ import { SearchComponent } from './search/search.component';
 import { LeftBarDesktopComponent } from './left-bar-desktop/left-bar-desktop.component';
 import { UploadMediaComponent } from './upload-media/upload-media.component';
 
+import { environment as env } from '../environments/environment';
 import { IAppState, INITIAL_STATE } from './redux/store/store';
 import { rootReducer } from './redux/reducers/reducer';
 import { FeedComponent } from './feed/feed.component';
-
-const firebaseConfig = {
-  apiKey: "AIzaSyA1n-AtdJil_EaSaPy0APXyrzUGfgC72d4",
-  authDomain: "connectall-6568a.firebaseapp.com",
-  databaseURL: "https://connectall-6568a.firebaseio.com",
-  projectId: "connectall-6568a",
-  storageBucket: "connectall-6568a.appspot.com",
-  messagingSenderId: "498019218914",
-  appId: "1:498019218914:web:8100fbf5c90d91bffd75bb"
-};
 
 @NgModule({
   declarations: [
@@ -58,7 +49,7 @@ const firebaseConfig = {
     ReactiveFormsModule,
     HttpClientModule,
     NgReduxModule,
-    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireModule.initializeApp(env.firebaseConfig),
     AngularFireStorageModule
   ],
   providers: [AngularFirestore],

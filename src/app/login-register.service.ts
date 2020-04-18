@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { NgRedux } from '@angular-redux/store';
+import { Router } from '@angular/router';
 
+import { environment as env } from '../environments/environment';
 import { IAppState } from './redux/store/store';
 import * as actions from './redux/actions/actions';
-import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,7 @@ export class LoginRegisterService {
     private httpClient: HttpClient,
     private ngRedux: NgRedux<IAppState>
   ) {
-    this.baseUrl = 'http://127.0.0.1:3000/api';
+    this.baseUrl = env.baseUrl;
   }
 
   sendRegisterForm = async (form) => {

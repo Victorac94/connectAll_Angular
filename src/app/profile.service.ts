@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { NgRedux } from '@angular-redux/store';
 
+import { environment as env } from '../environments/environment';
 import { IAppState } from './redux/store/store';
 import * as actions from './redux/actions/actions';
 
@@ -18,7 +19,7 @@ export class ProfileService {
     private httpClient: HttpClient,
     private router: Router
   ) {
-    this.baseUrl = 'http://localhost:3000/api/users';
+    this.baseUrl = env.baseUrl + '/users';
   }
 
   async getMyBasicInfo(): Promise<any> {
