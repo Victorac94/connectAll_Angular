@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgRedux, NgReduxModule, DevToolsExtension } from '@angular-redux/store';
 import { AngularFireModule } from '@angular/fire';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -50,6 +50,7 @@ import { FeedComponent } from './feed/feed.component';
     HttpClientModule,
     NgReduxModule,
     AngularFireModule.initializeApp(env.firebaseConfig),
+    AngularFirestoreModule,
     AngularFireStorageModule
   ],
   providers: [AngularFirestore],

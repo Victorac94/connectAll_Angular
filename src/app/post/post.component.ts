@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NgRedux } from '@angular-redux/store';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 import { formatTime, capitalize } from '../share/utility';
 import { PostService } from '../post.service';
@@ -23,7 +24,8 @@ export class PostComponent implements OnInit {
 
   constructor(
     private postService: PostService,
-    private ngRedux: NgRedux<IAppState>
+    private ngRedux: NgRedux<IAppState>,
+    private db: AngularFirestore
   ) {
     this.formatTime = formatTime;
     this.capitalize = capitalize;
@@ -37,6 +39,11 @@ export class PostComponent implements OnInit {
     const response = await this.postService.deletePost(post);
 
     if (response.affectedRows === 1) {
+      // const file = this.post.post_picture.match(/\/o\/(images|videos)%2F(.)\?alt=media&token=/);
+      // const file = this.post.post_picture.match(/(images)/);
+      // console.log(file);
+      // this.db.collection('files').doc(file[1])
+
       this.ngRedux.dispatch({
         type: actions.SET_NOTIFICATION_MESSAGE,
         data: 'Post deleted successfully',

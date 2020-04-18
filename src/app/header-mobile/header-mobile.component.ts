@@ -24,6 +24,12 @@ export class HeaderMobileComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    const state = this.ngRedux.getState();
+
+    this.myCategories = state.myCategories;
+    this.currentCategory = state.currentCategory;
+    this.currentView = state.currentView;
+
     this.ngRedux.subscribe(() => {
       const state = this.ngRedux.getState();
 
