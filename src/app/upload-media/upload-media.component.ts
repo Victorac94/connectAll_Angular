@@ -64,12 +64,12 @@ export class UploadMediaComponent implements OnInit {
     this.percentage = this.task.percentageChanges();
 
     this.snapshot = this.task.snapshotChanges().pipe(
-      tap(console.log),
+      // tap(console.log),
       // The file's download URL
       finalize(async () => {
         this.downloadURL = await ref.getDownloadURL().toPromise();
 
-        console.log(this.downloadURL);
+        // console.log(this.downloadURL);
 
         this.downloadMediaUrl.emit(this.downloadURL);
 

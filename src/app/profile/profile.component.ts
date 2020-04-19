@@ -18,6 +18,7 @@ export class ProfileComponent implements OnInit {
   profileForm: FormGroup;
   editing: boolean;
   profileInfo: any;
+  myBasicInfo: any;
   myProfile: boolean;
   userCategories: any;
 
@@ -67,6 +68,8 @@ export class ProfileComponent implements OnInit {
         this.router.navigate(['/profile']);
         return;
       };
+
+      this.myBasicInfo = state.myBasicInfo;
 
       // Get whole profile information (user info, categories, posts)
       this.profileInfo = await this.profileService.getProfile(params.userId || myUserId);
